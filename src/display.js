@@ -1,9 +1,8 @@
 import Icon from './img/icon.svg'
 
-const createHeader = () => {
+const createHeader = (() => {
 
     const header = document.createElement("header");
-    document.body.appendChild(header);
 
     const logoDiv = document.createElement("div");
     logoDiv.id = "logo-div";
@@ -25,12 +24,13 @@ const createHeader = () => {
     header.appendChild(logoDiv);
     header.appendChild(addTaskHeaderButton);
 
-}
+    return { header }
 
-const createMain = () => {
+})();
+
+const createMain = (() => {
 
     const main = document.createElement("main");
-    document.body.appendChild(main);
 
     const menuDiv = document.createElement("div");
     menuDiv.id = "menu-div";
@@ -63,12 +63,13 @@ const createMain = () => {
 
     // 특정 to-do를 불러오는 function 만들어 실행한 후 toDoDiv에 추가
 
-}
+    return { main }
+})();
 
 
 const displayLoader = () => {
-    createHeader();
-    createMain();
+    document.body.appendChild(createHeader.header);
+    document.body.appendChild(createMain.main);
 }
 
 export { displayLoader };
