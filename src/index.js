@@ -1,5 +1,7 @@
 import './reset.css';
 import './style.css';
-import { displayLoader } from './display';
+import DOMLoader from './DOMevents';
 
-displayLoader();
+document.addEventListener('DOMContentLoaded', () => {
+    DOMLoader();
+})

@@ -39,7 +39,7 @@ main {
 #icon {
     filter: invert(75%) sepia(10%) saturate(2586%) hue-rotate(145deg) brightness(76%) contrast(87%);
     width: 35px;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 #add-task-header {
