@@ -13,18 +13,16 @@ class Todo {
 const projectManager = {
 
     project: {
-        "My Project": []
+        "My Project": [new Todo("Buy lemon juice", false, false, 2023 - 11 - 22, "My Project", "")]
     }
     ,
 
     setProject: function (newTodo) {
 
-        const projectOfNewTodo = newTodo.project
-
-        if (projectOfNewTodo in project) {
-            project[projectOfNewTodo].push(newTodo);
+        if (newTodo.project in this.project) {
+            this.project[newTodo.project].push(newTodo);
         } else {
-            project[projectOfNewTodo] = [newTodo];
+            this.project[newTodo.project] = [newTodo];
         }
     }
 
