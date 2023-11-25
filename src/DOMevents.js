@@ -1,6 +1,7 @@
 import Icon from './img/icon.svg'
-import { add, format } from 'date-fns'
+import { format } from 'date-fns'
 import { Todo, projectManager } from './objects.js'
+import projectMenuLoader from './mainboard-menus/projects.js';
 
 
 export default function DOMLoader() {
@@ -18,46 +19,11 @@ export default function DOMLoader() {
     })();
 
 
-    function mainboardEvents() {
+    (function mainboardEvents() {
 
-        const mainboardDiv = document.getElementById("mainboard-div");
+        projectMenuLoader();
 
-        for (let key in projectManager.project) {
-
-            const p = document.createElement("p");
-            p.classList = "project-title";
-            p.innerHTML = key;
-
-            const todoDiv = document.createElement("div");
-            todoDiv.id = "project-child-todo-div"
-            todoDiv.style.display = "none";
-
-            for (let project of projectManager.project[key]) {
-                const p = document.createElement("p");
-                p.innerHTML = project.title;
-                p.id = "project-child-todo";
-                todoDiv.appendChild(p);
-            }
-
-            const projectDiv = document.createElement("div");
-            projectDiv.className = "project-div"
-            projectDiv.addEventListener("click", () => {
-                if (todoDiv.style.display === "none") {
-                    todoDiv.style.display = "";
-                } else {
-                    todoDiv.style.display = "none";
-                }
-            });
-
-            projectDiv.appendChild(p);
-            projectDiv.appendChild(todoDiv);
-            mainboardDiv.appendChild(projectDiv);
-        }
-
-
-    };
-
-    mainboardEvents();
+    })();
 
 
     (function dialogEvents() {
