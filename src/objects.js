@@ -13,7 +13,7 @@ class Todo {
 const projectManager = {
 
     project: {
-        "My Project": [new Todo("Buy lemon juice", false, false, 2023 - 11 - 22, "My Project", "")]
+        "My Project": [new Todo("Buy lemon juice", false, false, "2023-11-22", "My Project", "")]
     }
     ,
 

@@ -2,6 +2,7 @@ import Icon from './img/icon.svg'
 import { format } from 'date-fns'
 import { Todo, projectManager } from './objects.js'
 import projectMenuLoader from './mainboard-menus/projects.js';
+import childTodoLoader from "./mainboard-menus/child-todo.js";
 
 
 export default function DOMLoader() {
@@ -67,11 +68,11 @@ export default function DOMLoader() {
 
             projectManager.setProject(todo);
 
-            const todoDiv = document.getElementById("project-child-todo-div");
-            const titleP = document.createElement("p");
-            titleP.innerHTML = todo.title;
-            titleP.id = "project-child-todo";
-            todoDiv.appendChild(titleP);
+            const projectDiv = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
+            const todoDiv = document.createElement("div");
+            todoDiv.className = "child-todo";
+            childTodoLoader(todoDiv, todo);
+            projectDiv.appendChild(todoDiv);
 
             console.log(projectManager.project);
         })

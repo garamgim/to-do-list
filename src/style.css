@@ -56,3 +56,20 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden-todo {
+    display: none;
+}
+
+.show-todo {
+    display: block;
+}
+
+.child-todo {
+    display: flex;
+}

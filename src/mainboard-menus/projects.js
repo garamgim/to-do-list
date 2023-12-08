@@ -1,4 +1,5 @@
 import { projectManager } from "../objects";
+import childTodoLoader from "./child-todo";
 
 export default function projectMenuLoader() {
 
@@ -9,45 +10,53 @@ export default function projectMenuLoader() {
         // Mother div for a project
         const projectDiv = document.createElement("div");
         projectDiv.className = "project-div"
-        projectDiv.addEventListener("click", () => {
-            if (todoDiv.style.display === "none") {
-                todoDiv.style.display = "";
-            } else {
-                todoDiv.style.display = "none";
-            }
-        });
+        projectDiv.id = key.toLowerCase().split(" ").join("");
 
-        const p = document.createElement("p");
-        p.classList = "project-title";
-        p.innerHTML = key;
+
+        // Project title & Remove-project Button
+        const projectHeader = document.createElement("div");
+        projectHeader.className = "project-header";
+
+
+        const projectTitle = document.createElement("p");
+        projectTitle.classList = "project-title";
+        projectTitle.innerHTML = key;
 
         const removeProjectBtn = document.createElement("button");
         removeProjectBtn.classList = "remove-project-button";
         removeProjectBtn.innerHTML = "✕";
 
-        projectDiv.appendChild(p);
-        projectDiv.appendChild(removeProjectBtn);
+        projectHeader.appendChild(projectTitle);
+        projectHeader.appendChild(removeProjectBtn);
+        projectDiv.appendChild(projectHeader);
 
 
         // Todo slides which is opened upon clicking project title
-        const todoDiv = document.createElement("div");
-        todoDiv.id = "project-child-todo-div"
-        todoDiv.style.display = "none";
+        const projectChildTodos = document.createElement("div");
+        projectChildTodos.id = `${key.toLowerCase().split(" ").join("")}-todos`;
+        projectChildTodos.className = "hidden-todo";
 
-        for (let project of projectManager.project[key]) {
-            const p = document.createElement("p");
-            p.innerHTML = project.title;
-            p.id = "project-child-todo";
-
-            todoDiv.appendChild(p);
+        for (let todo of projectManager.project[key]) {
+            const todoDiv = document.createElement("div");
+            todoDiv.className = "child-todo";
+            childTodoLoader(todoDiv, todo);
+            projectChildTodos.appendChild(todoDiv);
         }
+        projectDiv.appendChild(projectChildTodos);
+
+        projectTitle.addEventListener("click", () => {
+            if (projectChildTodos.className === "hidden-todo") {
+                projectChildTodos.className = "show-todo";
+            } else {
+                projectChildTodos.className = "hidden-todo";
+            }
+        });
 
         mainboardDiv.appendChild(projectDiv);
-        mainboardDiv.appendChild(todoDiv);
     }
 
 
-    // Add project div
+    // "Add-project" div
     const addProjectDiv = document.createElement("div");
     addProjectDiv.id = "add-project-div";
 
