@@ -64,10 +64,10 @@ export default function projectMenuLoader() {
     addProjectBtn.id = "add-project-button";
     addProjectBtn.innerHTML = "Add a project";
     addProjectBtn.addEventListener("click", () => {
-        if (addProjectInput.style.display === "none") {
-            addProjectInput.style.display = "";
+        if (addProjectInputDiv.style.display === "none") {
+            addProjectInputDiv.style.display = "";
         } else {
-            addProjectInput.style.display = "none";
+            addProjectInputDiv.style.display = "none";
         }
     })
 
@@ -76,10 +76,22 @@ export default function projectMenuLoader() {
     addProjectInput.setAttribute("placeholder", "Project Title");
     addProjectInput.autofocus = true;
     addProjectInput.id = "add-project-input";
-    addProjectInput.style.display = "none";
+
+    const addProjectEnter = document.createElement("button");
+    addProjectEnter.id = "add-project-enter";
+    addProjectEnter.innerHTML = "Enter";
+    addProjectEnter.addEventListener("click", () => {
+        projectManager.project[`${addProjectInput.value}`] = [];
+        console.log(projectManager.project);
+    })
+
+    const addProjectInputDiv = document.createElement("div");
+    addProjectInputDiv.appendChild(addProjectInput);
+    addProjectInputDiv.appendChild(addProjectEnter);
+    addProjectInputDiv.style.display = "none";
 
     addProjectDiv.appendChild(addProjectBtn);
-    addProjectDiv.appendChild(addProjectInput);
+    addProjectDiv.appendChild(addProjectInputDiv);
 
     mainboardDiv.appendChild(addProjectDiv);
 
