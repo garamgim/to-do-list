@@ -1,5 +1,5 @@
 import { projectManager } from "../objects";
-import projectDivLoader from "../DOMfunctions/project-div-loader";
+import newProjectLoader from "../DOMfunctions/new-project-loader";
 import childTodoLoader from "../DOMfunctions/child-todo-loader";
 
 export default function projectMenuLoader() {
@@ -8,7 +8,7 @@ export default function projectMenuLoader() {
 
     for (let key in projectManager.project) {
         const mainboardDiv = document.getElementById("mainboard-div");
-        const projectDiv = projectDivLoader(key);
+        const projectDiv = newProjectLoader(key);
         mainboardDiv.appendChild(projectDiv);
     }
 
@@ -37,11 +37,11 @@ export default function projectMenuLoader() {
     const addProjectEnter = document.createElement("button");
     addProjectEnter.id = "add-project-enter";
     addProjectEnter.innerHTML = "Enter";
-    addProjectEnter.addEventListener("click", () => {
+    addProjectEnter.addEventListener("click", (e) => {
         e.preventDefault();
         const title = addProjectInput.value;
         projectManager.setProjectByTitle(title);
-        mainboardDiv.insertBefore(projectDivLoader(txt), mainboardDiv.firstChild);
+        mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.firstChild);
         addProjectInput.value = "";
     })
 

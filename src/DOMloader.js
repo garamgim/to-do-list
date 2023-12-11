@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import { Todo, projectManager } from './objects.js'
 import childTodoLoader from './DOMfunctions/child-todo-loader.js';
 import projectMenuLoader from './mainboard-menus/project-menu-loader.js';
-import projectDivLoader from "./DOMfunctions/project-div-loader.js";
+import newProjectLoader from "./DOMfunctions/new-project-loader.js";
 
 export default function DOMLoader() {
 
@@ -93,7 +93,7 @@ export default function DOMLoader() {
                 if (newProjectInput.style.display !== "none") {
                     // Add a new project div to the main board
                     const mainBoard = document.getElementById("mainboard-div");
-                    mainBoard.insertBefore(projectDivLoader(projectInput), mainBoard.firstChild);
+                    mainBoard.insertBefore(newProjectLoader(projectInput), mainBoard.firstChild);
                 } else {
                     // Just add child-todo to existing project header, not adding an option to a select box
                     const projectDiv = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
