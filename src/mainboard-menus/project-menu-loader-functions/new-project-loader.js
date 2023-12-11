@@ -2,6 +2,7 @@ import childTodoLoader from "./child-todo-loader";
 import { projectManager } from "../../objects";
 
 export default function (key) {
+
     // Mother div for a project
     const projectDiv = document.createElement("div");
     projectDiv.className = "project-div"
@@ -11,7 +12,6 @@ export default function (key) {
     // Project title & Remove-project Button
     const projectHeader = document.createElement("div");
     projectHeader.className = "project-header";
-
 
     const projectTitle = document.createElement("p");
     projectTitle.classList = "project-title";
@@ -46,7 +46,6 @@ export default function (key) {
         childTodoLoader(todoDiv, todo);
         projectChildTodos.appendChild(todoDiv);
     }
-
     projectDiv.appendChild(projectChildTodos);
 
     projectTitle.addEventListener("click", () => {
@@ -56,6 +55,7 @@ export default function (key) {
             projectChildTodos.className = "hidden-todo";
         }
     });
+
 
     // Add a new option to project select box in dialog
     const projectSelectBox = document.getElementById("project");

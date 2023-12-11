@@ -52,12 +52,15 @@ main {
     border: none;
 }
 
-#menu-div {
+#menu-board {
     display: flex;
     flex-direction: column;
 }
 
-#to-do-div {}
+#to-do-board {
+    display: none;
+    flex-direction: column;
+}
 
 #add-project-div {
     display: flex;

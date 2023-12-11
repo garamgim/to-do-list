@@ -92,7 +92,7 @@ export default function () {
 
                 if (newProjectInput.style.display !== "none") {
                     // Add a new project div to the main board
-                    const mainBoard = document.getElementById("mainboard-div");
+                    const mainBoard = document.getElementById("mainboard");
                     mainBoard.insertBefore(newProjectLoader(projectInput), mainBoard.firstChild);
                 } else {
                     // Just add child-todo to existing project header, not adding an option to a select box
@@ -107,6 +107,9 @@ export default function () {
                 newProjectInput.style.display = "none";
                 form.reset();
                 dialog.close();
+
+                console.log("Added");
+                console.log(projectManager.project);
             } else {
                 form.reportValidity()
             }

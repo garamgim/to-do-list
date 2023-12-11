@@ -27,7 +27,7 @@ export default function () {
     addProjectEnter.innerHTML = "Enter";
     addProjectEnter.addEventListener("click", (e) => {
         e.preventDefault();
-        const mainboardDiv = document.getElementById("mainboard-div")
+        const mainboardDiv = document.getElementById("mainboard")
         const title = addProjectInput.value;
         projectManager.setProjectByTitle(title);
         mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.firstChild);

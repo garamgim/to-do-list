@@ -4,7 +4,7 @@ import childTodoLoader from "./project-menu-loader-functions/child-todo-loader";
 import projectInputLoader from "./project-menu-loader-functions/project-input-loader";
 
 export default function projectMenuLoader() {
-    const mainboardDiv = document.getElementById("mainboard-div");
+    const mainboardDiv = document.getElementById("mainboard");
 
     for (let key in projectManager.project) {
         const projectDiv = newProjectLoader(key);
