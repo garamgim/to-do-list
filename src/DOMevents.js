@@ -44,13 +44,13 @@ export default function DOMLoader() {
 
 
         // Project select box
-        const project = document.getElementById("project");
+        const projectSelectBox = document.getElementById("project");
 
         for (let key in projectManager.project) {
             const option = document.createElement("option");
             option.value = key;
             option.innerHTML = key;
-            project.appendChild(option);
+            projectSelectBox.appendChild(option);
         }
 
         const newProjectOption = document.createElement("option");
@@ -59,16 +59,17 @@ export default function DOMLoader() {
 
         const newProjectInput = document.getElementById("new-project");
 
-        project.addEventListener("change", () => {
-            if (project.value === "new") {
+        projectSelectBox.addEventListener("change", () => {
+            if (projectSelectBox.value === "new") {
                 newProjectInput.required = true;
                 newProjectInput.style.display = "";
             } else {
+                newProjectInput.required = false;
                 newProjectInput.style.display = "none";
             }
         })
 
-        project.appendChild(newProjectOption);
+        projectSelectBox.appendChild(newProjectOption);
 
 
         // Submit button
@@ -79,15 +80,16 @@ export default function DOMLoader() {
 
             if (checkStatus) {
 
+                // Make a new todo with form values
                 let titleInput = document.getElementById("todo-title").value;
                 let done = false;
                 let urgentInput = document.getElementById("urgent").checked;
                 let dateInput = date.value;
                 let projectInput = "";
-                if (project.value === "new") {
-                    projectInput = document.getElementById("new-project").value;
+                if (projectSelectBox.value === "new") {
+                    projectInput = newProjectInput.value;
                 } else {
-                    projectInput = project.value;
+                    projectInput = projectSelectBox.value;
                 }
                 let descriptionInput = document.getElementById("description").value;
 
@@ -95,21 +97,26 @@ export default function DOMLoader() {
 
                 projectManager.setProject(todo);
 
-                let projectDiv = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
 
-                if (projectDiv === null) {
+                if (newProjectInput.style.display !== "none") {
+                    // Add a new project to a project select box
                     const option = document.createElement("option");
                     option.innerHTML = projectInput;
                     option.value = projectInput
-                    project.appendChild(option);
-                    document.getElementById("mainboard-div").appendChild(projectDivLoader(projectInput));
+                    project.insertBefore(option, projectSelectBox.firstChild);
+                    const mainBoard = document.getElementById("mainboard-div");
+                    mainBoard.insertBefore(projectDivLoader(projectInput), mainBoard.firstChild);
                 } else {
+                    // Just add child-todo to existing project header, not adding an option to a select box
+                    const projectDiv = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
                     const todoDiv = document.createElement("div");
                     todoDiv.className = "child-todo";
                     childTodoLoader(todoDiv, todo);
                     projectDiv.appendChild(todoDiv);
                 }
 
+                newProjectInput.required = false;
+                newProjectInput.style.display = "none";
                 form.reset();
                 dialog.close();
 
