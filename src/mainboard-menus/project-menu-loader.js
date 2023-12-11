@@ -1,11 +1,13 @@
 import { projectManager } from "../objects";
-import childTodoLoader from "./child-todo";
+import projectDivLoader from "./project-div-loader";
+import childTodoLoader from "./child-todo-loader";
 
 export default function projectMenuLoader() {
 
     const mainboardDiv = document.getElementById("mainboard-div");
 
     for (let key in projectManager.project) {
+        const mainboardDiv = document.getElementById("mainboard-div");
 
         // Mother div for a project
         const projectDiv = document.createElement("div");
@@ -54,8 +56,8 @@ export default function projectMenuLoader() {
         });
 
         mainboardDiv.appendChild(projectDiv);
-
     }
+
 
     // "Add-project" div
     const addProjectDiv = document.createElement("div");
