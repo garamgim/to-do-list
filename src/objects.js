@@ -17,13 +17,17 @@ const projectManager = {
     }
     ,
 
-    setProject: function (newTodo) {
+    setProjectByTodo: function (newTodo) {
 
         if (newTodo.project in this.project) {
             this.project[newTodo.project].push(newTodo);
         } else {
             this.project[newTodo.project] = [newTodo];
         }
+    },
+
+    setProjectByTitle: function (title) {
+        this.project[title] = [];
     }
 
 };

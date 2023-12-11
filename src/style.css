@@ -59,6 +59,11 @@ main {
 
 #to-do-div {}
 
+#add-project-div {
+    display: flex;
+    justify-content: space-between;
+}
+
 .project-header {
     display: flex;
     justify-content: space-between;

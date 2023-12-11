@@ -57,5 +57,13 @@ export default function (key) {
         }
     });
 
+    // Add a new option to project select box in dialog
+    const projectSelectBox = document.getElementById("project");
+    const option = document.createElement("option");
+    option.value = key;
+    option.innerHTML = key;
+    option.id = `${key.toLowerCase().split(" ").join("")}-option`
+    projectSelectBox.insertBefore(option, projectSelectBox.lastChild);
+
     return projectDiv
 }

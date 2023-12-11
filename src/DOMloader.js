@@ -46,14 +46,6 @@ export default function DOMLoader() {
         // Project select box
         const projectSelectBox = document.getElementById("project");
 
-        for (let key in projectManager.project) {
-            const option = document.createElement("option");
-            option.value = key;
-            option.innerHTML = key;
-            option.id = `${key.toLowerCase().split(" ").join("")}-option`
-            projectSelectBox.appendChild(option);
-        }
-
         const newProjectOption = document.createElement("option");
         newProjectOption.innerHTML = "Create a new project";
         newProjectOption.value = "new";
@@ -96,15 +88,10 @@ export default function DOMLoader() {
 
                 let todo = new Todo(titleInput, done, urgentInput, dateInput, projectInput, descriptionInput);
 
-                projectManager.setProject(todo);
+                projectManager.setProjectByTodo(todo);
 
                 if (newProjectInput.style.display !== "none") {
-                    // Add a new project to a project select box
-                    const option = document.createElement("option");
-                    option.innerHTML = projectInput;
-                    option.value = projectInput
-                    option.id = `${projectInput.toLowerCase().split(" ").join("")}-option`
-                    project.insertBefore(option, projectSelectBox.lastChild);
+                    // Add a new project div to the main board
                     const mainBoard = document.getElementById("mainboard-div");
                     mainBoard.insertBefore(projectDivLoader(projectInput), mainBoard.firstChild);
                 } else {

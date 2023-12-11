@@ -38,9 +38,11 @@ export default function projectMenuLoader() {
     addProjectEnter.id = "add-project-enter";
     addProjectEnter.innerHTML = "Enter";
     addProjectEnter.addEventListener("click", () => {
-        projectManager.project[`${addProjectInput.value}`] = [];
+        e.preventDefault();
+        const title = addProjectInput.value;
+        projectManager.setProjectByTitle(title);
+        mainboardDiv.insertBefore(projectDivLoader(txt), mainboardDiv.firstChild);
         addProjectInput.value = "";
-        console.log(projectManager.project);
     })
 
     const addProjectInputDiv = document.createElement("div");
