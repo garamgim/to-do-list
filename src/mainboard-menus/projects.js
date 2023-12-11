@@ -42,6 +42,7 @@ export default function projectMenuLoader() {
             childTodoLoader(todoDiv, todo);
             projectChildTodos.appendChild(todoDiv);
         }
+
         projectDiv.appendChild(projectChildTodos);
 
         projectTitle.addEventListener("click", () => {
@@ -53,8 +54,8 @@ export default function projectMenuLoader() {
         });
 
         mainboardDiv.appendChild(projectDiv);
-    }
 
+    }
 
     // "Add-project" div
     const addProjectDiv = document.createElement("div");
@@ -82,6 +83,7 @@ export default function projectMenuLoader() {
     addProjectEnter.innerHTML = "Enter";
     addProjectEnter.addEventListener("click", () => {
         projectManager.project[`${addProjectInput.value}`] = [];
+        addProjectInput.value = "";
         console.log(projectManager.project);
     })
 
