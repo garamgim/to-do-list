@@ -1,11 +1,11 @@
 import Icon from './img/icon.svg'
 import { format } from 'date-fns'
 import { Todo, projectManager } from './objects.js'
-import childTodoLoader from './DOMfunctions/child-todo-loader.js';
+import childTodoLoader from './mainboard-menus/project-menu-loader-functions/child-todo-loader.js';
 import projectMenuLoader from './mainboard-menus/project-menu-loader.js';
-import newProjectLoader from "./DOMfunctions/new-project-loader.js";
+import newProjectLoader from "./mainboard-menus/project-menu-loader-functions/new-project-loader.js";
 
-export default function DOMLoader() {
+export default function () {
 
     (function iconLoader() {
 

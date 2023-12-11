@@ -1,7 +1,7 @@
 import './reset.css';
 import './style.css';
-import DOMLoader from './DOMloader';
+import mainboardLoader from './mainboard-loader';
 
 document.addEventListener('DOMContentLoaded', () => {
-    DOMLoader();
+    mainboardLoader();
 })

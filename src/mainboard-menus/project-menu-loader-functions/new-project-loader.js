@@ -1,5 +1,5 @@
 import childTodoLoader from "./child-todo-loader";
-import { projectManager } from "../objects";
+import { projectManager } from "../../objects";
 
 export default function (key) {
     // Mother div for a project
