@@ -1,6 +1,6 @@
 import { projectManager } from "../objects";
-import projectDivLoader from "./project-div-loader";
-import childTodoLoader from "./child-todo-loader";
+import projectDivLoader from "../DOMfunctions/project-div-loader";
+import childTodoLoader from "../DOMfunctions/child-todo-loader";
 
 export default function projectMenuLoader() {
 
@@ -19,7 +19,6 @@ export default function projectMenuLoader() {
         const projectHeader = document.createElement("div");
         projectHeader.className = "project-header";
 
-
         const projectTitle = document.createElement("p");
         projectTitle.classList = "project-title";
         projectTitle.innerHTML = key;
@@ -27,6 +26,15 @@ export default function projectMenuLoader() {
         const removeProjectBtn = document.createElement("button");
         removeProjectBtn.classList = "remove-project-button";
         removeProjectBtn.innerHTML = "✕";
+        removeProjectBtn.addEventListener("click", () => {
+            const result = confirm("Are you sure you want to delete this project?")
+            if (result) {
+                delete projectManager.project[key];
+                projectHeader.remove();
+                document.getElementById(`${key.toLowerCase().split(" ").join("")}-option`).remove();
+                console.log(projectManager.project)
+            }
+        })
 
         projectHeader.appendChild(projectTitle);
         projectHeader.appendChild(removeProjectBtn);

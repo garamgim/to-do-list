@@ -1,9 +1,9 @@
 import Icon from './img/icon.svg'
 import { format } from 'date-fns'
 import { Todo, projectManager } from './objects.js'
-import childTodoLoader from './mainboard-menus/child-todo-loader.js';
+import childTodoLoader from './DOMfunctions/child-todo-loader.js';
 import projectMenuLoader from './mainboard-menus/project-menu-loader.js';
-import projectDivLoader from "./mainboard-menus/project-div-loader.js";
+import projectDivLoader from "./DOMfunctions/project-div-loader.js";
 
 export default function DOMLoader() {
 
@@ -50,6 +50,7 @@ export default function DOMLoader() {
             const option = document.createElement("option");
             option.value = key;
             option.innerHTML = key;
+            option.id = `${key.toLowerCase().split(" ").join("")}-option`
             projectSelectBox.appendChild(option);
         }
 
@@ -75,11 +76,11 @@ export default function DOMLoader() {
         // Submit button
         const submitBtn = document.getElementById("submit-button");
         submitBtn.addEventListener('click', () => {
+
             const form = document.getElementById("form")
             let checkStatus = form.checkValidity();
 
             if (checkStatus) {
-
                 // Make a new todo with form values
                 let titleInput = document.getElementById("todo-title").value;
                 let done = false;
@@ -97,12 +98,12 @@ export default function DOMLoader() {
 
                 projectManager.setProject(todo);
 
-
                 if (newProjectInput.style.display !== "none") {
                     // Add a new project to a project select box
                     const option = document.createElement("option");
                     option.innerHTML = projectInput;
                     option.value = projectInput
+                    option.id = `${projectInput.toLowerCase().split(" ").join("")}-option`
                     project.insertBefore(option, projectSelectBox.firstChild);
                     const mainBoard = document.getElementById("mainboard-div");
                     mainBoard.insertBefore(projectDivLoader(projectInput), mainBoard.firstChild);
@@ -119,10 +120,6 @@ export default function DOMLoader() {
                 newProjectInput.style.display = "none";
                 form.reset();
                 dialog.close();
-
-                console.log(todo);
-                console.log(projectInput);
-                console.log(projectManager.project);
             } else {
                 form.reportValidity()
             }
