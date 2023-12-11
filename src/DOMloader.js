@@ -104,7 +104,7 @@ export default function DOMLoader() {
                     option.innerHTML = projectInput;
                     option.value = projectInput
                     option.id = `${projectInput.toLowerCase().split(" ").join("")}-option`
-                    project.insertBefore(option, projectSelectBox.firstChild);
+                    project.insertBefore(option, projectSelectBox.lastChild);
                     const mainBoard = document.getElementById("mainboard-div");
                     mainBoard.insertBefore(projectDivLoader(projectInput), mainBoard.firstChild);
                 } else {

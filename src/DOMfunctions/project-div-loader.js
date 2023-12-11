@@ -2,8 +2,6 @@ import childTodoLoader from "./child-todo-loader";
 import { projectManager } from "../objects";
 
 export default function (key) {
-    const mainboardDiv = document.getElementById("mainboard-div");
-
     // Mother div for a project
     const projectDiv = document.createElement("div");
     projectDiv.className = "project-div"
@@ -31,7 +29,7 @@ export default function (key) {
     // Todo slides which is opened upon clicking project title
     const projectChildTodos = document.createElement("div");
     projectChildTodos.id = `${key.toLowerCase().split(" ").join("")}-todos`;
-    projectChildTodos.className = "hidden-todo";
+    projectChildTodos.className = "show-todo";
 
     for (let todo of projectManager.project[key]) {
         const todoDiv = document.createElement("div");

@@ -44,7 +44,7 @@ export default function projectMenuLoader() {
         // Todo slides which is opened upon clicking project title
         const projectChildTodos = document.createElement("div");
         projectChildTodos.id = `${key.toLowerCase().split(" ").join("")}-todos`;
-        projectChildTodos.className = "hidden-todo";
+        projectChildTodos.className = "show-todo";
 
         for (let todo of projectManager.project[key]) {
             const todoDiv = document.createElement("div");
