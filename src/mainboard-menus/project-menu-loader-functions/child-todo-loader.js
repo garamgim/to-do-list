@@ -12,6 +12,7 @@ export default function (div, todo) {
     title.innerHTML = todo.title;
     title.id = `${todo.title.toLowerCase().split(" ").join("")}-title`;
     title.addEventListener("click", () => {
+        console.log("current", todo);
         todoBoardLoader(todo);
     });
     title.className = "child-todo-title"

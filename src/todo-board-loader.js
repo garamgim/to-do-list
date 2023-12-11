@@ -34,7 +34,10 @@ export default function (todo) {
     editDescription.value = todo.description;
 
     const editButton = document.getElementById("edit-button");
-    editButton.addEventListener("click", (e) => {
+    const editButtonClone = editButton.cloneNode(true);
+    editButton.parentNode.replaceChild(editButtonClone, editButton);
+
+    editButtonClone.addEventListener("click", (e) => {
         e.preventDefault();
 
         // Update object
@@ -67,4 +70,6 @@ export default function (todo) {
         console.log(projectManager.project);
         console.log(todo);
     })
+
+
 }
