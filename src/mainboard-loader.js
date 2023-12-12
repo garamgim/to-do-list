@@ -99,6 +99,7 @@ export default function () {
                     const projectDiv = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
                     const todoDiv = document.createElement("div");
                     todoDiv.className = "child-todo";
+                    todoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`
                     childTodoLoader(todoDiv, todo);
                     projectDiv.appendChild(todoDiv);
                 }

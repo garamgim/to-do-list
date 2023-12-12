@@ -18,7 +18,6 @@ const projectManager = {
     ,
 
     setProjectByTodo: function (newTodo) {
-
         if (newTodo.project in this.project) {
             this.project[newTodo.project].push(newTodo);
         } else {
@@ -28,6 +27,16 @@ const projectManager = {
 
     setProjectByTitle: function (title) {
         this.project[title] = [];
+    },
+
+    moveProject: function (todo, newProjectTitle) {
+        if (newProjectTitle in this.project) {
+            this.project[newProjectTitle].push(todo);
+        } else {
+            this.project[newProjectTitle] = [todo];
+        }
+        this.project[todo.project].splice(this.project[todo.project].indexOf(todo), 1);
+        todo.project = newProjectTitle;
     }
 
 };

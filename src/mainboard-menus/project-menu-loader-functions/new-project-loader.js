@@ -43,6 +43,7 @@ export default function (key) {
     for (let todo of projectManager.project[key]) {
         const todoDiv = document.createElement("div");
         todoDiv.className = "child-todo";
+        todoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`
         childTodoLoader(todoDiv, todo);
         projectChildTodos.appendChild(todoDiv);
     }
