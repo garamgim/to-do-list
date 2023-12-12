@@ -37,8 +37,11 @@ const projectManager = {
         }
         this.project[todo.project].splice(this.project[todo.project].indexOf(todo), 1);
         todo.project = newProjectTitle;
-    }
+    },
 
+    deleteTodo: function (todo) {
+        this.project[todo.project].splice(this.project[todo.project].indexOf(todo), 1);
+    }
 };
 
 export { Todo, projectManager }
