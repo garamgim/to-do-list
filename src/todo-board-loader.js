@@ -101,17 +101,14 @@ export default function (todo) {
             displayUrgent.style.textDecoration = "none";
         }
 
-        //project select box
-
+        // Update project
         if (todo.project !== editProject.value) {
             if (newProjectInput.style.display === "") {
-
                 projectManager.moveProject(todo, newProjectInput.value);
 
                 const mainBoard = document.getElementById("mainboard");
                 mainBoard.insertBefore(newProjectLoader(newProjectInput.value), mainBoard.firstChild);
             } else {
-
                 projectManager.moveProject(todo, editProject.value);
 
                 const newTodoDiv = document.createElement("div");
@@ -121,10 +118,10 @@ export default function (todo) {
 
                 const projectDiv = document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}`);
                 projectDiv.appendChild(newTodoDiv);
-
             }
             oldTodoDiv.remove();
 
+            // New option for the select box on todo-board
             const currentProjectOption = document.createElement("option");
             currentProjectOption.value = todo.project;
             currentProjectOption.innerHTML = todo.project;
@@ -134,13 +131,8 @@ export default function (todo) {
             currentProjectOption.selected = true;
             newProjectInput.style.display = "none";
         }
-
+        alert("Successfully Edited!");
         toDoBoard.style.display = "none";
-
-        //project select box
-        console.log("Edited")
-        console.log(projectManager.project);
-        console.log(todo);
     })
 
 }

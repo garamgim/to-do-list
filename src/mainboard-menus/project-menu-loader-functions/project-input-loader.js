@@ -30,7 +30,7 @@ export default function () {
         const mainboardDiv = document.getElementById("mainboard")
         const title = addProjectInput.value;
         projectManager.setProjectByTitle(title);
-        mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.firstChild);
+        mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.lastChild);
         addProjectInput.value = "";
     })
 
