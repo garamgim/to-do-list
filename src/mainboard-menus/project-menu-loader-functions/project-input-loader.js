@@ -16,6 +16,11 @@ export default function () {
         }
     })
 
+    const invalidMsg = document.createElement("p");
+    invalidMsg.id = "mainboard-project-invalid-message";
+    invalidMsg.innerHTML = "A project with this name already exists.";
+    invalidMsg.style.display = "none";
+
     const addProjectInput = document.createElement("input");
     addProjectInput.setAttribute("type", "text");
     addProjectInput.setAttribute("placeholder", "Project Title");
@@ -26,15 +31,25 @@ export default function () {
     addProjectEnter.id = "add-project-enter";
     addProjectEnter.innerHTML = "Enter";
     addProjectEnter.addEventListener("click", (e) => {
-        e.preventDefault();
-        const mainboardDiv = document.getElementById("mainboard")
-        const title = addProjectInput.value;
-        projectManager.setProjectByTitle(title);
-        mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.lastChild);
-        addProjectInput.value = "";
+        let validity = projectManager.isProjectTitleValid(addProjectInput.value);
+
+        if (validity) {
+            e.preventDefault();
+            const mainboardDiv = document.getElementById("mainboard")
+            const title = addProjectInput.value;
+            projectManager.setProjectByTitle(title);
+            mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.lastChild);
+            addProjectInput.value = "";
+            invalidMsg.style.display = "none";
+        } else {
+            invalidMsg.style.display = "";
+        }
     })
 
     const addProjectInputDiv = document.createElement("div");
+    addProjectInputDiv.id = "add-project-input-div"
+
+    addProjectInputDiv.appendChild(invalidMsg);
     addProjectInputDiv.appendChild(addProjectInput);
     addProjectInputDiv.appendChild(addProjectEnter);
     addProjectInputDiv.style.display = "none";

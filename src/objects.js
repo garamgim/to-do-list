@@ -41,7 +41,15 @@ const projectManager = {
 
     deleteTodo: function (todo) {
         this.project[todo.project].splice(this.project[todo.project].indexOf(todo), 1);
+    },
+
+    isProjectTitleValid: function (title) {
+        for (let key in this.project) {
+            if (title === key) return false;
+        }
+        return true;
     }
+
 };
 
 export { Todo, projectManager }

@@ -67,27 +67,33 @@ export default function () {
 
         // Submit button
         const submitBtn = document.getElementById("submit-button");
-        submitBtn.addEventListener('click', () => {
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let titleInput = document.getElementById("todo-title").value;
+            let done = false;
+            let urgentInput = document.getElementById("urgent").checked;
+            let dateInput = date.value;
+            let projectInput = "";
+            if (projectSelectBox.value === "new") {
+                projectInput = newProjectInput.value;
+            } else {
+                projectInput = projectSelectBox.value;
+            }
+            let descriptionInput = document.getElementById("description").value;
+
 
             const form = document.getElementById("form")
             let checkStatus = form.checkValidity();
 
-            if (checkStatus) {
-                // Make a new todo with form values
-                let titleInput = document.getElementById("todo-title").value;
-                let done = false;
-                let urgentInput = document.getElementById("urgent").checked;
-                let dateInput = date.value;
-                let projectInput = "";
-                if (projectSelectBox.value === "new") {
-                    projectInput = newProjectInput.value;
-                } else {
-                    projectInput = projectSelectBox.value;
-                }
-                let descriptionInput = document.getElementById("description").value;
+            let checkProjectValidity = projectManager.isProjectTitleValid(projectInput);
+            let invalidMsg = document.getElementById("project-invalid-message");
 
+            // If newly typed project already exists
+            if (newProjectInput.style.display !== "none" && !checkProjectValidity) {
+                invalidMsg.style.display = "";
+            } else if (checkStatus) {
+                // Make a new todo with form values & set todo's project 
                 let todo = new Todo(titleInput, done, urgentInput, dateInput, projectInput, descriptionInput);
-
                 projectManager.setProjectByTodo(todo);
 
                 if (newProjectInput.style.display !== "none") {
@@ -103,18 +109,15 @@ export default function () {
                     childTodoLoader(todoDiv, todo);
                     projectDiv.appendChild(todoDiv);
                 }
-
+                // Reset form
                 newProjectInput.required = false;
                 newProjectInput.style.display = "none";
+                invalidMsg.style.display = "none";
                 form.reset();
                 dialog.close();
-
-                console.log("Added");
-                console.log(projectManager.project);
             } else {
                 form.reportValidity()
             }
-
         })
 
     })();

@@ -67,6 +67,10 @@ main {
     justify-content: space-between;
 }
 
+#add-project-input-div {
+    display: flex;
+}
+
 .project-header {
     display: flex;
     justify-content: space-between;

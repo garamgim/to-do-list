@@ -27,7 +27,6 @@ export default function (key) {
             projectHeader.remove();
             document.getElementById(`${key.toLowerCase().split(" ").join("")}-todos`).remove();
             document.getElementById(`${key.toLowerCase().split(" ").join("")}-option`).remove();
-            console.log(projectManager.project)
         }
     })
     projectHeader.appendChild(projectTitle);

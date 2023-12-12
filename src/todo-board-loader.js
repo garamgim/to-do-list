@@ -31,7 +31,6 @@ export default function (todo) {
     const editDate = document.getElementById("edit-date");
     editDate.value = todo.date;
 
-    // project select box
     const editProject = document.getElementById("edit-project");
     editProject.innerHTML = "";
 
@@ -60,7 +59,6 @@ export default function (todo) {
             newProjectInput.style.display = "none";
         }
     })
-    //project select box
 
     const editDescription = document.getElementById("edit-description");
     editDescription.value = todo.description;
@@ -101,13 +99,31 @@ export default function (todo) {
             displayUrgent.style.textDecoration = "none";
         }
 
+        const invalidMsg = document.getElementById("edit-project-invalid-message");
+
         // Update project
         if (todo.project !== editProject.value) {
-            if (newProjectInput.style.display === "") {
-                projectManager.moveProject(todo, newProjectInput.value);
 
-                const mainBoard = document.getElementById("mainboard");
-                mainBoard.insertBefore(newProjectLoader(newProjectInput.value), mainBoard.firstChild);
+
+            if (newProjectInput.style.display === "") {
+                if (projectManager.isProjectTitleValid(newProjectInput.value)) {
+                    // Make new project by input if valid
+                    projectManager.moveProject(todo, newProjectInput.value);
+                    const mainBoard = document.getElementById("mainboard");
+                    mainBoard.insertBefore(newProjectLoader(newProjectInput.value), mainBoard.firstChild);
+
+                    // New option for the select box on todo-board
+                    const currentProjectOption = document.createElement("option");
+                    currentProjectOption.value = todo.project;
+                    currentProjectOption.innerHTML = todo.project;
+                    currentProjectOption.id = `${todo.project.toLowerCase().split(" ").join("")}-option-todo-board`;
+                    editProject.insertBefore(currentProjectOption, editProject.lastChild);
+
+                    // Refresh the form
+                    refreshForm();
+                } else {
+                    invalidMsg.style.display = "";
+                }
             } else {
                 projectManager.moveProject(todo, editProject.value);
 
@@ -118,21 +134,20 @@ export default function (todo) {
 
                 const projectDiv = document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}`);
                 projectDiv.appendChild(newTodoDiv);
+
+                // Refresh the form
+                refreshForm();
             }
-            oldTodoDiv.remove();
-
-            // New option for the select box on todo-board
-            const currentProjectOption = document.createElement("option");
-            currentProjectOption.value = todo.project;
-            currentProjectOption.innerHTML = todo.project;
-            currentProjectOption.id = `${todo.project.toLowerCase().split(" ").join("")}-option-todo-board`;
-
-            editProject.insertBefore(currentProjectOption, editProject.lastChild);
-            currentProjectOption.selected = true;
-            newProjectInput.style.display = "none";
         }
-        alert("Successfully Edited!");
-        toDoBoard.style.display = "none";
+
+        function refreshForm() {
+            alert("Successfully Edited!");
+            oldTodoDiv.remove();
+            newProjectInput.style.display = "none";
+            toDoBoard.style.display = "none";
+            invalidMsg.style.display = "none";
+            newProjectInput.value = "";
+        }
     })
 
 }

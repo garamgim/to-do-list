@@ -14,7 +14,6 @@ export default function (div, todo) {
     title.innerHTML = todo.title;
     title.id = `${todo.title.toLowerCase().split(" ").join("")}-title`;
     title.addEventListener("click", () => {
-        console.log("current", todo);
         todoBoardLoader(todo);
     });
     title.className = "child-todo-title"
@@ -35,13 +34,11 @@ export default function (div, todo) {
             date.style.textDecoration = "line-through";
             urgent.style.textDecoration = "line-through";
             todo.done = true;
-            console.log(todo.done);
         } else {
             title.style.textDecoration = "none";
             date.style.textDecoration = "none";
             urgent.style.textDecoration = "none";
             todo.done = false;
-            console.log(todo.done);
         }
     })
 

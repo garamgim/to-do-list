@@ -52,6 +52,10 @@
                         style="display: none;">
                 </div>
                 <div>
+                    <p id="edit-project-invalid-message" style="display: none;">A project with this name already exists.
+                    </p>
+                </div>
+                <div>
                     <label for="edit-description">Description: </label>
                     <textarea name="edit-description" id="edit-description"></textarea>
                 </div>
@@ -68,7 +72,7 @@
                 <button id="close-button" value="cancel">✕</button>
             </div>
             <div>
-                <label for="todo-title">Project Title: </label>
+                <label for="todo-title">Task Title: </label>
                 <input type="text" name="todo-title" placeholder="Title" id="todo-title" autofocus required>
             </div>
             <div>
@@ -84,6 +88,9 @@
                     <option value="" disabled selected>Select a project</option>
                 </select>
                 <input type="text" name="new-project" id="new-project" placeholder="New Project" style="display: none;">
+            </div>
+            <div id="project-invalid-message" style="display: none;">
+                <p>A project with this name already exists.</p>
             </div>
             <div>
                 <label for="description">Description: </label>
