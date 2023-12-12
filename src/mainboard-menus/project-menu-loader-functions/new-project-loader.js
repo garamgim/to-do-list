@@ -35,7 +35,7 @@ export default function (key) {
     projectDiv.appendChild(projectHeader);
 
 
-    // Todo slides which is opened upon clicking project title
+    // Todo slides below the project title
     const projectChildTodos = document.createElement("div");
     projectChildTodos.id = `${key.toLowerCase().split(" ").join("")}-todos`;
     projectChildTodos.className = "show-todo";
@@ -49,15 +49,6 @@ export default function (key) {
     }
     projectDiv.appendChild(projectChildTodos);
 
-    projectTitle.addEventListener("click", () => {
-        if (projectChildTodos.className === "hidden-todo") {
-            projectChildTodos.className = "show-todo";
-        } else {
-            projectChildTodos.className = "hidden-todo";
-        }
-    });
-
-
     // Add a new option to project select box in dialog
     const projectSelectBox = document.getElementById("project");
     const option = document.createElement("option");
@@ -65,6 +56,22 @@ export default function (key) {
     option.innerHTML = key;
     option.id = `${key.toLowerCase().split(" ").join("")}-option`
     projectSelectBox.insertBefore(option, projectSelectBox.lastChild);
+
+    // If the project is empty, show dialog on click
+    // If not, show its own to-dos below itself
+    projectTitle.addEventListener("click", () => {
+        if (projectManager.project[key].length === 0) {
+            const dialog = document.getElementById("dialog");
+            dialog.showModal();
+            option.selected = true;
+        } else {
+            if (projectChildTodos.className === "hidden-todo") {
+                projectChildTodos.className = "show-todo";
+            } else {
+                projectChildTodos.className = "hidden-todo";
+            }
+        }
+    });
 
     return projectDiv
 }
