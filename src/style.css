@@ -1,0 +1,89 @@
+body {
+    background-color: #B0DAFF;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+header {
+    background-color: #FEFF86;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 20px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    width: 80vw;
+    background-color: #DAF5FF;
+}
+
+#logo-div {
+    display: flex;
+    align-items: center;
+    color: #0088ff;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+#icon {
+    filter: invert(33%) sepia(97%) saturate(2691%) hue-rotate(194deg) brightness(106%) contrast(103%);
+    width: 35px;
+    margin-left: 10px;
+}
+
+#add-task-header {
+    color: white;
+    background-color: #0088ff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    border: none;
+}
+
+#menu-board {
+    display: flex;
+    flex-direction: column;
+}
+
+#to-do-board {
+    display: none;
+    flex-direction: column;
+}
+
+#add-project-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-project-input-div {
+    display: flex;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden-todo {
+    display: none;
+}
+
+.show-todo {
+    display: block;
+}
+
+.child-todo {
+    display: flex;
+}
