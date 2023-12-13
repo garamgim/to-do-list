@@ -80,7 +80,18 @@ const projectManager = {
             }
         }
         return arr
+    },
+
+    deleteCompletedTask: function () {
+        for (let key in this.project) {
+            let arr = this.project[key];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].done) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
     }
-};
+}
 
 export { Todo, projectManager }
