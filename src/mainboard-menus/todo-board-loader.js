@@ -103,8 +103,6 @@ export default function (todo) {
 
         // Update project
         if (todo.project !== editProject.value) {
-
-
             if (newProjectInput.style.display === "") {
                 if (projectManager.isProjectTitleValid(newProjectInput.value)) {
                     // Make new project by input if valid
@@ -119,7 +117,7 @@ export default function (todo) {
                     currentProjectOption.id = `${todo.project.toLowerCase().split(" ").join("")}-option-todo-board`;
                     editProject.insertBefore(currentProjectOption, editProject.lastChild);
 
-                    // Refresh the form
+                    oldTodoDiv.remove();
                     refreshForm();
                 } else {
                     invalidMsg.style.display = "";
@@ -127,22 +125,27 @@ export default function (todo) {
             } else {
                 projectManager.moveProject(todo, editProject.value);
 
-                const newTodoDiv = document.createElement("div");
-                newTodoDiv.className = "child-todo";
-                newTodoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`;
-                childTodoLoader(newTodoDiv, todo);
-
                 const projectDiv = document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}`);
-                projectDiv.appendChild(newTodoDiv);
+                projectDiv.appendChild(newTodoDiv(todo));
 
-                // Refresh the form
+                oldTodoDiv.remove();
                 refreshForm();
             }
+        } else {
+            oldTodoDiv = newTodoDiv(todo);
+            refreshForm();
+        }
+
+        function newTodoDiv(todo) {
+            const newTodoDiv = document.createElement("div");
+            newTodoDiv.className = "child-todo";
+            newTodoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`;
+            childTodoLoader(newTodoDiv, todo);
+            return newTodoDiv;
         }
 
         function refreshForm() {
             alert("Successfully Edited!");
-            oldTodoDiv.remove();
             newProjectInput.style.display = "none";
             toDoBoard.style.display = "none";
             invalidMsg.style.display = "none";

@@ -12,7 +12,11 @@ class Todo {
 const projectManager = {
 
     project: {
-        "My Project": [new Todo("Buy lemon juice &#127819;", false, false, "2023-11-22", "My Project", "")]
+        "My Project": [
+            new Todo("Buy lemonade", false, false, "2023-12-31", "My Project", ""),
+            new Todo("Book tickets to Mars", false, false, "2023-12-10", "My Project", ""),
+            new Todo("Make a dentist appointment", false, false, "2023-12-25", "My Project", "")
+        ]
     },
 
     setProjectByTodo: function (newTodo) {

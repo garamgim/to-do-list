@@ -13,10 +13,9 @@ export default function (div, todo) {
     const title = document.createElement("p");
     title.innerHTML = todo.title;
     title.id = `${todo.title.toLowerCase().split(" ").join("")}-title`;
-    title.addEventListener("click", () => {
-        todoBoardLoader(todo);
-    });
-    title.className = "child-todo-title"
+    title.className = "child-todo-title";
+    title.addEventListener("click", () => { todoBoardLoader(todo) });
+
 
     const date = document.createElement("p");
     date.innerHTML = todo.date;
@@ -28,6 +27,16 @@ export default function (div, todo) {
     done.setAttribute("name", "done");
     done.id = `${todo.title.toLowerCase().split(" ").join("")}-done`
     done.className = "child-todo-done"
+    done.checked = todo.done;
+    if (done.checked) {
+        title.style.textDecoration = "line-through";
+        date.style.textDecoration = "line-through";
+        urgent.style.textDecoration = "line-through";
+    } else {
+        title.style.textDecoration = "none";
+        date.style.textDecoration = "none";
+        urgent.style.textDecoration = "none";
+    }
     done.addEventListener("click", () => {
         if (done.checked) {
             title.style.textDecoration = "line-through";
@@ -40,6 +49,7 @@ export default function (div, todo) {
             urgent.style.textDecoration = "none";
             todo.done = false;
         }
+        console.log(todo);
     })
 
     const deleteTodoBtn = document.createElement("button");

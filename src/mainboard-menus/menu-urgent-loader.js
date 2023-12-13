@@ -2,10 +2,10 @@ import { projectManager } from "../data";
 import childTodoLoader from "./functions/child-todo-loader";
 
 export default function menuUrgentLoader() {
-    const arr = projectManager.getUrgentTodo();
     const div = document.createElement("div");
     div.id = "mainboard-urgent-div"
 
+    const arr = projectManager.getUrgentTodo();
     if (arr.length === 0) {
         const p = document.createElement("p");
         p.id = "no-urgent-task"
@@ -13,7 +13,11 @@ export default function menuUrgentLoader() {
         div.appendChild(p);
     } else {
         for (let i = 0; i < arr.length; i++) {
-            childTodoLoader(div, arr[i])
+            const childDiv = document.createElement("div");
+            childDiv.classList = "child-todo";
+            childDiv.id = `${arr[i].title.toLowerCase().split(" ").join("")}-todo`
+            childTodoLoader(childDiv, arr[i]);
+            div.appendChild(childDiv);
         }
     }
 
