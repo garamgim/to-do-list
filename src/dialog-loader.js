@@ -67,19 +67,38 @@ export default function () {
             // Make a new todo with form values & set todo's project 
             let todo = new Todo(titleInput, done, urgentInput, dateInput, projectInput, descriptionInput);
             projectManager.setProjectByTodo(todo);
+            const mainBoard = document.getElementById("mainboard");
 
             if (newProjectInput.style.display !== "none") {
                 // Add a new project div to the main board
-                const mainBoard = document.getElementById("mainboard");
                 mainBoard.insertBefore(newProjectLoader(projectInput), mainBoard.lastChild);
             } else {
-                // Just add child-todo to existing project header, not adding an option to a select box
-                const projectDiv = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
                 const todoDiv = document.createElement("div");
                 todoDiv.className = "child-todo";
                 todoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`
                 childTodoLoader(todoDiv, todo);
-                projectDiv.appendChild(todoDiv);
+
+                let divID = mainBoard.children[0].id.split("-");
+                // Just add child-todo to existing project header, not adding an option to a select box
+                if (divID[1] === "project") {
+                    const div = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
+                    div.appendChild(todoDiv);
+                } else if (divID[1] === "all") {
+                    const div = document.getElementById("all-todo-div");
+                    div.appendChild(todoDiv);
+                } else if (divID[1] === "today") {
+                    if (todo.date === format(today, "yyyy-MM-dd")) {
+                        document.getElementById("no-today-task").remove();
+                        const div = document.getElementById("mainboard-today-div");
+                        div.append(todoDiv);
+                    }
+                } else if (divID[1] === "urgent") {
+                    if (todo.urgent) {
+                        document.getElementById("no-urgent-task").remove();
+                        const div = document.getElementById("mainboard-urgent-div");
+                        div.append(todoDiv);
+                    }
+                }
             }
             // Reset form
             newProjectInput.required = false;

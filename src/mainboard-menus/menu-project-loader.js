@@ -6,10 +6,18 @@ export default function menuProjectLoader() {
     const div = document.createElement("div");
     div.id = "mainboard-project-div"
 
-    for (let key in projectManager.project) {
-        const projectDiv = newProjectLoader(key);
-        div.appendChild(projectDiv);
+    if (Object.keys(projectManager.project).length !== 0) {
+        for (let key in projectManager.project) {
+            const projectDiv = newProjectLoader(key);
+            div.appendChild(projectDiv);
+        }
+    } else {
+        const p = document.createElement("p");
+        p.id = "no-project"
+        p.innerHTML = "No Project"
+        div.appendChild(p);
     }
+
 
     const addProjectDiv = projectInputLoader();
     div.appendChild(addProjectDiv);

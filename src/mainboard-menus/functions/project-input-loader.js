@@ -25,24 +25,27 @@ export default function () {
     addProjectInput.setAttribute("type", "text");
     addProjectInput.setAttribute("placeholder", "Project Title");
     addProjectInput.autofocus = true;
+    addProjectInput.required = true;
     addProjectInput.id = "add-project-input";
 
     const addProjectEnter = document.createElement("button");
     addProjectEnter.id = "add-project-enter";
     addProjectEnter.innerHTML = "Enter";
     addProjectEnter.addEventListener("click", (e) => {
-        let validity = projectManager.isProjectTitleValid(addProjectInput.value);
+        if (addProjectInput.value !== "") {
+            let validity = projectManager.isProjectTitleValid(addProjectInput.value);
 
-        if (validity) {
-            e.preventDefault();
-            const mainboardDiv = document.getElementById("mainboard")
-            const title = addProjectInput.value;
-            projectManager.setProjectByTitle(title);
-            mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.lastChild);
-            addProjectInput.value = "";
-            invalidMsg.style.display = "none";
-        } else {
-            invalidMsg.style.display = "";
+            if (validity) {
+                e.preventDefault();
+                const mainboardDiv = document.getElementById("mainboard-project-div")
+                const title = addProjectInput.value;
+                projectManager.setProjectByTitle(title);
+                mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.lastChild);
+                addProjectInput.value = "";
+                invalidMsg.style.display = "none";
+            } else {
+                invalidMsg.style.display = "";
+            }
         }
     })
 
