@@ -87,3 +87,9 @@ main {
 .child-todo {
     display: flex;
 }
+
+#sort-icon {
+    width: 15px;
+    height: 15px;
+    padding-right: 5px;
+}

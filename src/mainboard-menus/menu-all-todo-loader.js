@@ -1,15 +1,46 @@
-import { projectManager } from "../data";
-import childTodoLoader from "./functions/child-todo-loader";
+import { projectManager } from '../data';
+import childTodoLoader from './functions/child-todo-loader';
 import { compareAsc, parseISO } from 'date-fns'
-// Date로 sort하는 기능 넣기
+import SortIcon from '../img/sort.svg';
 
 export default function menuAllTodoLoader() {
     const div = document.createElement("div");
     div.id = "mainboard-all-div"
 
-    const arr = projectManager.getAllTodo();
-    arr.sort((a, b) => compareAsc(parseISO(a.date), parseISO(b.date)));
+    const sortDiv = document.createElement("div");
+    const todoDiv = document.createElement("div");
 
+    sortDiv.id = "sort-div";
+    todoDiv.id = "all-todo-div"
+
+    const todoArr = projectManager.getAllTodo();
+    todoMaker(todoArr, todoDiv);
+
+    let sortToggle = false;
+    const sortBtn = document.createElement("button");
+    sortBtn.innerHTML = `<img src=${SortIcon} id="sort-icon"></img>` + "Date"
+    sortBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        todoDiv.innerHTML = "";
+        if (!sortToggle) {
+            sortToggle = true;
+            todoArr.sort((a, b) => compareAsc(parseISO(a.date), parseISO(b.date)));
+            todoMaker(todoArr, todoDiv);
+        } else {
+            sortToggle = false;
+            todoArr.sort((a, b) => compareAsc(parseISO(b.date), parseISO(a.date)));
+            todoMaker(todoArr, todoDiv);
+        }
+    })
+    sortDiv.appendChild(sortBtn);
+
+    div.appendChild(sortDiv);
+    div.appendChild(todoDiv);
+
+    return div
+}
+
+function todoMaker(arr, div) {
     if (arr.length === 0) {
         const p = document.createElement("p");
         p.id = "no-task"
@@ -24,6 +55,5 @@ export default function menuAllTodoLoader() {
             div.appendChild(childDiv);
         }
     }
-
-    return div
 }
+
