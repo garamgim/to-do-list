@@ -2,17 +2,24 @@ import { format } from 'date-fns'
 import { Todo, projectManager } from './data.js'
 import childTodoLoader from './mainboard-menus/functions/child-todo-loader.js';
 import newProjectLoader from './mainboard-menus/functions/new-project-loader.js';
+import enterForClick from './mainboard-menus/functions/enter-for-click.js';
 
 export default function () {
-    // Close dialog button
+
     const dialog = document.getElementById("dialog");
+    const title = document.getElementById("todo-title");
+    const date = document.getElementById("todo-date");
+    const urgent = document.getElementById("urgent");
+    const description = document.getElementById("description");
+    const invalidMsg = document.getElementById("project-invalid-message");
+
+    // Close dialog button
     const closeBtn = document.getElementById("close-button");
     closeBtn.addEventListener("click", () => {
         dialog.close();
     })
 
     // Date formation
-    const date = document.getElementById("todo-date");
     const today = new Date();
     date.min = format(today, "yyyy-MM-dd");
 
@@ -41,9 +48,9 @@ export default function () {
     const submitBtn = document.getElementById("submit-button");
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        let titleInput = document.getElementById("todo-title").value;
+        let titleInput = title.value;
         let done = false;
-        let urgentInput = document.getElementById("urgent").checked;
+        let urgentInput = urgent.checked;
         let dateInput = date.value;
         let projectInput = "";
         if (projectSelectBox.value === "new") {
@@ -51,14 +58,13 @@ export default function () {
         } else {
             projectInput = projectSelectBox.value;
         }
-        let descriptionInput = document.getElementById("description").value;
+        let descriptionInput = description.value;
 
         // Check form validity & project title availability
-        const form = document.getElementById("form")
+        const form = document.getElementById("form");
         let checkStatus = form.checkValidity();
 
         let checkProjectValidity = projectManager.isProjectTitleValid(projectInput);
-        let invalidMsg = document.getElementById("project-invalid-message");
 
         // If newly typed project already exists
         if (newProjectInput.style.display !== "none" && !checkProjectValidity) {
@@ -111,4 +117,9 @@ export default function () {
         }
     })
 
+    // Enter key as submit button
+    title.addEventListener("keyup", (e) => enterForClick(e, submitBtn));
+    urgent.addEventListener("keyup", (e) => enterForClick(e, submitBtn));
+    date.addEventListener("keyup", (e) => enterForClick(e, submitBtn));
+    newProjectInput.addEventListener("keyup", (e) => enterForClick(e, submitBtn));
 }

@@ -1,5 +1,6 @@
 import { projectManager } from "../../data";
 import newProjectLoader from "./new-project-loader";
+import enterForClick from "./enter-for-click";
 
 export default function () {
     const addProjectDiv = document.createElement("div");
@@ -48,6 +49,7 @@ export default function () {
             }
         }
     })
+    addProjectInput.addEventListener("keyup", (e) => enterForClick(e, addProjectEnter));
 
     const addProjectInputDiv = document.createElement("div");
     addProjectInputDiv.id = "add-project-input-div"

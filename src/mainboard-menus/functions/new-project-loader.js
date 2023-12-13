@@ -53,6 +53,7 @@ export default function (key) {
     option.innerHTML = key;
     option.id = `${key.toLowerCase().split(" ").join("")}-option`
     projectSelectBox.insertBefore(option, projectSelectBox.lastChild);
+    console.log("here");
 
     // If the project is empty, show dialog on click
     // If not, show its own to-dos below itself

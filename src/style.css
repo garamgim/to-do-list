@@ -93,3 +93,9 @@ main {
     height: 15px;
     padding-right: 5px;
 }
+
+#lemon-img {
+    display: flex;
+    width: 200px;
+    height: 200px;
+}

@@ -1,4 +1,3 @@
-import projectMenuLoader from "./menu-project-loader";
 import { projectManager } from "../data";
 import childTodoLoader from "./functions/child-todo-loader";
 import newProjectLoader from "./functions/new-project-loader";
@@ -10,10 +9,14 @@ export default function (todo) {
     const displayDate = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-date`);
     const displayDone = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-done`);
 
+    const lemon = document.getElementById("lemon-board");
+    lemon.style.display = "none";
+
     const cancelEditButton = document.getElementById("edit-close-button");
     cancelEditButton.addEventListener("click", (e) => {
         e.preventDefault();
         toDoBoard.style.display = "none";
+        lemon.style.display = "flex";
     })
 
     const toDoBoard = document.getElementById("to-do-board");
@@ -150,7 +153,12 @@ export default function (todo) {
             toDoBoard.style.display = "none";
             invalidMsg.style.display = "none";
             newProjectInput.value = "";
+            lemon.style.display = "flex";
         }
     })
 
+    // Enter key as Edit button
+    editTitle.addEventListener("keyup", (e) => enterForClick(e, editButtonClone));
+    editDescription.addEventListener("keyup", (e) => enterForClick(e, editButtonClone));
+    newProjectInput.addEventListener("keyup", (e) => enterForClick(e, editButtonClone));
 }
