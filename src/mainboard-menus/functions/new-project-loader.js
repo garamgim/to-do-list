@@ -25,6 +25,7 @@ export default function (key) {
         if (result) {
             delete projectManager.project[key];
             document.getElementById(`${key.toLowerCase().split(" ").join("")}`).remove();
+            document.getElementById(`${key.toLowerCase().split(" ").join("")}-option`).remove();
         }
     })
     projectHeader.appendChild(projectTitle);

@@ -73,9 +73,11 @@ export default function () {
             // Make a new todo with form values & set todo's project 
             let todo = new Todo(titleInput, done, urgentInput, dateInput, projectInput, descriptionInput);
             projectManager.setProjectByTodo(todo);
-            const mainBoard = document.getElementById("mainboard");
 
-            if (newProjectInput.style.display !== "none") {
+            const mainBoard = document.getElementById("mainboard");
+            let divID = mainBoard.children[0].id.split("-");
+
+            if (newProjectInput.style.display !== "none" && divID[1] === "project") {
                 // Add a new project div to the main board
                 mainBoard.insertBefore(newProjectLoader(projectInput), mainBoard.lastChild);
             } else {
@@ -83,9 +85,7 @@ export default function () {
                 todoDiv.className = "child-todo";
                 todoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`
                 childTodoLoader(todoDiv, todo);
-
-                let divID = mainBoard.children[0].id.split("-");
-                // Just add child-todo to existing project header, not adding an option to a select box
+                // Add todo div according to which menu is opened on mainboard
                 if (divID[1] === "project") {
                     const div = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
                     div.appendChild(todoDiv);

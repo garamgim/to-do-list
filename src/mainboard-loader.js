@@ -13,7 +13,23 @@ export default function mainboardLoader() {
     const projectBtn = document.getElementById("menu-project-button");
     projectBtn.addEventListener("click", (e) => {
         e.preventDefault;
+
         mainboardDiv.innerHTML = "";
+        const projectSelectBox = document.getElementById("project");
+        projectSelectBox.innerHTML = "";
+
+        const selectProjectOption = document.createElement("option");
+        selectProjectOption.value = ""
+        selectProjectOption.disabled = true;
+        selectProjectOption.selected = true;
+        selectProjectOption.innerHTML = "Select a project";
+
+        const newProjectOption = document.createElement("option");
+        newProjectOption.innerHTML = "Create a new project";
+        newProjectOption.value = "new";
+
+        projectSelectBox.appendChild(selectProjectOption);
+        projectSelectBox.appendChild(newProjectOption);
         mainboardDiv.appendChild(menuProjectLoader());
     })
 
