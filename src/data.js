@@ -56,7 +56,7 @@ const projectManager = {
         let arr = [];
         for (let key in this.project) {
             for (let todo of this.project[key]) {
-                if (todo.urgent === true) arr.push(todo);
+                if (todo.urgent) arr.push(todo);
             }
         }
         return arr
@@ -82,15 +82,14 @@ const projectManager = {
         return arr
     },
 
-    deleteCompletedTask: function () {
+    getCompletedTask: function () {
+        let arr = [];
         for (let key in this.project) {
-            let arr = this.project[key];
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i].done) {
-                    arr.splice(i, 1);
-                }
+            for (let todo of this.project[key]) {
+                if (todo.done) arr.push(todo);
             }
         }
+        return arr
     }
 }
 

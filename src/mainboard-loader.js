@@ -2,6 +2,7 @@ import menuProjectLoader from "./mainboard-menus/menu-project-loader";
 import menuUrgentLoader from "./mainboard-menus/menu-urgent-loader";
 import menuTodayLoader from "./mainboard-menus/menu-today-loader";
 import menuAllTodoLoader from "./mainboard-menus/menu-all-todo-loader";
+import { projectManager } from "./data";
 
 export default function mainboardLoader() {
     const mainboardDiv = document.getElementById("mainboard");
@@ -33,5 +34,18 @@ export default function mainboardLoader() {
         e.preventDefault;
         mainboardDiv.innerHTML = "";
         mainboardDiv.appendChild(menuAllTodoLoader());
+    })
+
+    const deleteCompletedBtn = document.getElementById("delete-completed-button");
+    deleteCompletedBtn.addEventListener("click", (e) => {
+        const result = confirm("Are you sure you want to delete tasks?")
+        if (result) {
+            e.preventDefault;
+            let arr = projectManager.getCompletedTask();
+            for (let todo of arr) {
+                projectManager.deleteTodo(todo);
+                document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-todo`).remove();
+            }
+        }
     })
 }
