@@ -31,11 +31,11 @@
         <div id="edit-todo-board">
             <div id="lemon-board"></div>
             <div id="to-do-board">
+                <div id="edit-todo-tab">
+                    <p id="edit-todo-tab-title">Task Details</p>
+                    <button id="edit-close-button" value="cancel">✕</button>
+                </div>
                 <form id="edit-todo">
-                    <div>
-                        <p id="edit-todo-tab">Task Details</p>
-                        <button id="edit-close-button" value="cancel">✕</button>
-                    </div>
                     <div>
                         <label for="edit-title">Title: </label>
                         <input type="text" name="edit-title" id="edit-title">
@@ -67,7 +67,7 @@
                         <label for="edit-description">Description: </label>
                         <textarea name="edit-description" id="edit-description"></textarea>
                     </div>
-                    <div>
+                    <div id="edit-button-div">
                         <button type="submit" id="edit-button">Edit</button>
                     </div>
                 </form>

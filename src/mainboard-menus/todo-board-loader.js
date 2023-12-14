@@ -1,6 +1,7 @@
 import { projectManager } from "../data";
 import childTodoLoader from "./functions/child-todo-loader";
 import newProjectLoader from "./functions/new-project-loader";
+import enterForClick from "./functions/enter-for-click";
 
 export default function (todo) {
 
@@ -11,6 +12,13 @@ export default function (todo) {
 
     const lemon = document.getElementById("lemon-board");
     lemon.style.display = "none";
+
+    const newProjectInput = document.getElementById("edit-project-input");
+    newProjectInput.style.display = "none";
+    newProjectInput.value = "";
+
+    const invalidMsg = document.getElementById("edit-project-invalid-message");
+    invalidMsg.style.display = "none";
 
     const cancelEditButton = document.getElementById("edit-close-button");
     cancelEditButton.addEventListener("click", (e) => {
@@ -52,7 +60,6 @@ export default function (todo) {
 
     document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}-option-todo-board`).selected = true;
 
-    const newProjectInput = document.getElementById("edit-project-input");
     editProject.addEventListener("change", () => {
         if (editProject.value === "new") {
             newProjectInput.required = true;
@@ -101,8 +108,6 @@ export default function (todo) {
             displayDate.style.textDecoration = "none";
             displayUrgent.style.textDecoration = "none";
         }
-
-        const invalidMsg = document.getElementById("edit-project-invalid-message");
 
         // Update project
         if (todo.project !== editProject.value) {
