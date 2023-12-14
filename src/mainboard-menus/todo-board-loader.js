@@ -65,7 +65,9 @@ export default function (todo) {
             newProjectInput.required = true;
             newProjectInput.style.display = "";
         } else {
+            invalidMsg.style.display = "none";
             newProjectInput.required = false;
+            newProjectInput.value = "";
             newProjectInput.style.display = "none";
         }
     })
