@@ -12,16 +12,25 @@ export default function () {
     const urgent = document.getElementById("urgent");
     const description = document.getElementById("description");
     const invalidMsg = document.getElementById("project-invalid-message");
+    const newProjectInput = document.getElementById("new-project");
+    const form = document.getElementById("form");
+
 
     // Close dialog button
     const closeBtn = document.getElementById("close-button");
     closeBtn.addEventListener("click", () => {
+        newProjectInput.required = false;
+        newProjectInput.style.display = "none";
+        invalidMsg.style.display = "none";
+        form.reset();
         dialog.close();
     })
+
 
     // Date formation
     const today = new Date();
     date.min = format(today, "yyyy-MM-dd");
+
 
     // Project select box
     const projectSelectBox = document.getElementById("project");
@@ -30,8 +39,6 @@ export default function () {
     newProjectOption.innerHTML = "Create a new project";
     newProjectOption.value = "new";
 
-    const newProjectInput = document.getElementById("new-project");
-
     projectSelectBox.addEventListener("change", () => {
         if (projectSelectBox.value === "new") {
             newProjectInput.required = true;
@@ -39,10 +46,12 @@ export default function () {
         } else {
             newProjectInput.required = false;
             newProjectInput.style.display = "none";
+            invalidMsg.style.display = "none";
         }
     })
 
     projectSelectBox.appendChild(newProjectOption);
+
 
     // Submit button
     const submitBtn = document.getElementById("submit-button");
@@ -61,7 +70,6 @@ export default function () {
         let descriptionInput = description.value;
 
         // Check form validity & project title availability
-        const form = document.getElementById("form");
         let checkStatus = form.checkValidity();
 
         let checkProjectValidity = projectManager.isProjectTitleValid(projectInput);
@@ -76,7 +84,6 @@ export default function () {
 
             const mainBoard = document.getElementById("mainboard");
             let divID = mainBoard.children[0].id.split("-");
-
             if (newProjectInput.style.display !== "none" && divID[1] === "project") {
                 // Add a new project div to the main board
                 mainBoard.insertBefore(newProjectLoader(projectInput), mainBoard.lastChild);

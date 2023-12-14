@@ -31,6 +31,11 @@ export default function mainboardLoader() {
         projectSelectBox.appendChild(selectProjectOption);
         projectSelectBox.appendChild(newProjectOption);
         mainboardDiv.appendChild(menuProjectLoader());
+
+        projectBtn.className = "menu-selected";
+        urgentBtn.className = "menu-button";
+        todayBtn.className = "menu-button";
+        allBtn.className = "menu-button";
     })
 
     const urgentBtn = document.getElementById("menu-urgent-button");
@@ -38,6 +43,11 @@ export default function mainboardLoader() {
         e.preventDefault;
         mainboardDiv.innerHTML = "";
         mainboardDiv.appendChild(menuUrgentLoader());
+
+        projectBtn.className = "menu-button";
+        urgentBtn.className = "menu-selected";
+        todayBtn.className = "menu-button";
+        allBtn.className = "menu-button";
     })
 
     const todayBtn = document.getElementById("menu-today-button");
@@ -45,6 +55,11 @@ export default function mainboardLoader() {
         e.preventDefault;
         mainboardDiv.innerHTML = "";
         mainboardDiv.appendChild(menuTodayLoader());
+
+        projectBtn.className = "menu-button";
+        urgentBtn.className = "menu-button";
+        todayBtn.className = "menu-selected";
+        allBtn.className = "menu-button";
     })
 
     const allBtn = document.getElementById("menu-all-button");
@@ -52,6 +67,11 @@ export default function mainboardLoader() {
         e.preventDefault;
         mainboardDiv.innerHTML = "";
         mainboardDiv.appendChild(menuAllTodoLoader());
+
+        projectBtn.className = "menu-button";
+        urgentBtn.className = "menu-button";
+        todayBtn.className = "menu-button";
+        allBtn.className = "menu-selected";
     })
 
     const deleteCompletedBtn = document.getElementById("delete-completed-button");
