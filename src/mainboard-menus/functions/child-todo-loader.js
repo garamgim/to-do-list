@@ -53,7 +53,7 @@ export default function (div, todo) {
     })
 
     const deleteTodoBtn = document.createElement("button");
-    deleteTodoBtn.id = "delete-todo-button";
+    deleteTodoBtn.className = "delete-todo-button";
     deleteTodoBtn.innerHTML = "✕";
     deleteTodoBtn.addEventListener("click", (e) => {
         const result = confirm("Are you sure you want to delete this task?")

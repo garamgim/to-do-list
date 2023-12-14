@@ -3,16 +3,21 @@ import newProjectLoader from "./functions/new-project-loader";
 import projectInputLoader from "./functions/project-input-loader";
 
 export default function menuProjectLoader() {
-    const div = document.createElement("div");
-    div.id = "mainboard-project-div"
+    const mainboardDiv = document.createElement("div");
+    mainboardDiv.id = "mainboard-project-div";
+
+    const allProjectDiv = document.createElement("div");
+    allProjectDiv.id = "all-project-div";
 
     for (let key in projectManager.project) {
         const projectDiv = newProjectLoader(key);
-        div.appendChild(projectDiv);
+        allProjectDiv.appendChild(projectDiv);
     }
 
     const addProjectDiv = projectInputLoader();
-    div.appendChild(addProjectDiv);
 
-    return div
+    mainboardDiv.appendChild(allProjectDiv);
+    mainboardDiv.appendChild(addProjectDiv);
+
+    return mainboardDiv
 };
