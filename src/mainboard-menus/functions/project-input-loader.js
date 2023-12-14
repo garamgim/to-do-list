@@ -38,10 +38,10 @@ export default function () {
 
             if (validity) {
                 e.preventDefault();
-                const mainboardDiv = document.getElementById("mainboard-project-div")
+                const allProjectDiv = document.getElementById("all-project-div")
                 const title = addProjectInput.value;
                 projectManager.setProjectByTitle(title);
-                mainboardDiv.insertBefore(newProjectLoader(title), mainboardDiv.lastChild);
+                allProjectDiv.appendChild(newProjectLoader(title));
                 addProjectInput.value = "";
                 invalidMsg.style.display = "none";
             } else {

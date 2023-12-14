@@ -56,7 +56,7 @@ export default function mainboardLoader() {
 
     const deleteCompletedBtn = document.getElementById("delete-completed-button");
     deleteCompletedBtn.addEventListener("click", (e) => {
-        const result = confirm("Are you sure you want to delete tasks?")
+        const result = confirm("Are you sure you want to delete completed tasks?")
         if (result) {
             e.preventDefault;
             let arr = projectManager.getCompletedTask();
