@@ -18,6 +18,7 @@ export default function menuAllTodoLoader() {
 
     let sortToggle = false;
     const sortBtn = document.createElement("button");
+    sortBtn.id = "sort-button";
     sortBtn.innerHTML = `<img src=${SortIcon} id="sort-icon"></img>` + "Date"
     sortBtn.addEventListener("click", (e) => {
         e.preventDefault();
