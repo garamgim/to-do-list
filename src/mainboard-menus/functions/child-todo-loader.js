@@ -49,7 +49,6 @@ export default function (div, todo) {
             urgent.style.textDecoration = "none";
             todo.done = false;
         }
-        console.log(todo);
     })
 
     const deleteTodoBtn = document.createElement("button");
