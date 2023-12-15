@@ -35,7 +35,6 @@ export default function () {
     addProjectEnter.addEventListener("click", (e) => {
         if (addProjectInput.value !== "") {
             let validity = projectManager.isProjectTitleValid(addProjectInput.value);
-
             if (validity) {
                 e.preventDefault();
                 const allProjectDiv = document.getElementById("all-project-div");

@@ -24,11 +24,11 @@ export default function (key) {
     removeProjectBtn.addEventListener("click", () => {
         const result = confirm("Are you sure you want to delete this project?")
         if (result) {
-            delete projectManager.project[key];
+            localStorage.removeItem(key);
             document.getElementById(`${key.toLowerCase().split(" ").join("")}`).remove();
             document.getElementById(`${key.toLowerCase().split(" ").join("")}-option`).remove();
             // Show "no project" message if there 0 project left after deleting
-            if (Object.keys(projectManager.project).length === 0) {
+            if (Object.keys(projectManager.project()).length === 0) {
                 const noProjectMessage = document.createElement("p");
                 noProjectMessage.innerHTML = "No Project";
                 noProjectMessage.id = "no-project";
@@ -53,7 +53,8 @@ export default function (key) {
     projectChildTodos.id = `${key.toLowerCase().split(" ").join("")}-todos`;
     projectChildTodos.className = "show-todo";
 
-    for (let todo of projectManager.project[key]) {
+    const projects = projectManager.project();
+    for (let todo of projects[key]) {
         const todoDiv = document.createElement("div");
         todoDiv.className = "child-todo";
         todoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`
@@ -73,7 +74,7 @@ export default function (key) {
     // If the project is empty, show dialog on click
     // If not, show its own to-dos below itself
     projectTitle.addEventListener("click", () => {
-        if (projectManager.project[key].length === 0) {
+        if (projects[key].length === 0) {
             const dialog = document.getElementById("dialog");
             dialog.showModal();
             option.selected = true;

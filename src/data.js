@@ -11,51 +11,80 @@ class Todo {
 
 const projectManager = {
 
-    project: {
-        "My Project": [
-            new Todo("Buy lemonade", false, false, "2023-12-31", "My Project", ""),
-            new Todo("Squeeze lemon on the right", false, true, "2023-12-10", "My Project", ""),
-            new Todo("Call alfy", true, false, "2023-12-25", "My Project", "")
-        ]
+    project: function () {
+        let projects = {};
+        let storage = { ...localStorage }
+        for (let key in storage) {
+            projects[key] = JSON.parse(storage[key])
+        }
+        return projects
     },
 
     setProjectByTodo: function (newTodo) {
-        if (newTodo.project in this.project) {
-            this.project[newTodo.project].push(newTodo);
+        let projects = this.project();
+        if (newTodo.project in projects) {
+            projects[newTodo.project].push(newTodo);
         } else {
-            this.project[newTodo.project] = [newTodo];
+            projects[newTodo.project] = [newTodo];
         }
+        localStorage.setItem(newTodo.project, JSON.stringify(projects[newTodo.project]));
     },
 
     setProjectByTitle: function (title) {
-        this.project[title] = [];
+        localStorage.setItem(title, JSON.stringify([]))
     },
 
     moveProject: function (todo, newProjectTitle) {
-        if (newProjectTitle in this.project) {
-            this.project[newProjectTitle].push(todo);
-        } else {
-            this.project[newProjectTitle] = [todo];
-        }
-        this.project[todo.project].splice(this.project[todo.project].indexOf(todo), 1);
+        let projects = this.project();
+
+        let oldProject = todo.project;
+        let oldIdx = projects[todo.project].findIndex(i => i.title === todo.title);
+
         todo.project = newProjectTitle;
+        if (newProjectTitle in projects) {
+            projects[newProjectTitle].push(todo);
+        } else {
+            projects[newProjectTitle] = [todo];
+        }
+        localStorage.setItem(newProjectTitle, JSON.stringify(projects[newProjectTitle]));
+
+        projects[oldProject].splice(oldIdx, 1);
+        localStorage.setItem(oldProject, JSON.stringify(projects[oldProject]));
     },
 
     deleteTodo: function (todo) {
-        this.project[todo.project].splice(this.project[todo.project].indexOf(todo), 1);
+        let projects = this.project();
+        let project = todo.project;
+        let idx = projects[todo.project].findIndex(i => i.title === todo.title);
+        projects[project].splice(idx, 1);
+        localStorage.setItem(project, JSON.stringify(projects[project]));
+    },
+
+    updateTodo: function (todo, keyToChange, newValue) {
+        let projects = this.project();
+        let projectTitle = todo.project
+        let projectArray = projects[projectTitle];
+        let idx = projectArray.findIndex(i => i.title === todo.title);
+        console.log(idx);
+        console.log(projectArray[idx][keyToChange.toString()]);
+        projectArray[idx][keyToChange.toString()] = newValue;
+        localStorage.setItem(projectTitle, JSON.stringify(projectArray));
+        // here to fix
     },
 
     isProjectTitleValid: function (title) {
-        for (let key in this.project) {
+        let projects = this.project();
+        for (let key in projects) {
             if (title === key) return false;
         }
         return true;
     },
 
     getUrgentTodo: function () {
+        let projects = this.project();
         let arr = [];
-        for (let key in this.project) {
-            for (let todo of this.project[key]) {
+        for (let key in projects) {
+            for (let todo of projects[key]) {
                 if (todo.urgent) arr.push(todo);
             }
         }
@@ -63,9 +92,10 @@ const projectManager = {
     },
 
     getTodayTodo: function (today) {
+        let projects = this.project();
         let arr = [];
-        for (let key in this.project) {
-            for (let todo of this.project[key]) {
+        for (let key in projects) {
+            for (let todo of projects[key]) {
                 if (todo.date === today) arr.push(todo);
             }
         }
@@ -73,9 +103,10 @@ const projectManager = {
     },
 
     getAllTodo: function () {
+        let projects = this.project();
         let arr = [];
-        for (let key in this.project) {
-            for (let todo of this.project[key]) {
+        for (let key in projects) {
+            for (let todo of projects[key]) {
                 arr.push(todo);
             }
         }
@@ -83,9 +114,10 @@ const projectManager = {
     },
 
     getCompletedTask: function () {
+        let projects = this.project();
         let arr = [];
-        for (let key in this.project) {
-            for (let todo of this.project[key]) {
+        for (let key in projects) {
+            for (let todo of projects[key]) {
                 if (todo.done) arr.push(todo);
             }
         }

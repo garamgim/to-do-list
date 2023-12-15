@@ -3,9 +3,17 @@ import menuUrgentLoader from "./mainboard-menus/menu-urgent-loader";
 import menuTodayLoader from "./mainboard-menus/menu-today-loader";
 import menuAllTodoLoader from "./mainboard-menus/menu-all-todo-loader";
 import lemon from "./mainboard-menus/lemon";
-import { projectManager } from "./data";
+import { Todo, projectManager } from "./data";
 
 export default function mainboardLoader() {
+    if (Object.keys(projectManager.project()).length === 0) {
+        localStorage.setItem("My Project", JSON.stringify([
+            new Todo("Buy lemonade", false, false, "2023-12-31", "My Project", ""),
+            new Todo("Squeeze lemon on the right", false, true, "2023-12-10", "My Project", ""),
+            new Todo("Call alfy", true, false, "2023-12-25", "My Project", "")
+        ]))
+    }
+
     const mainboardDiv = document.getElementById("mainboard");
     mainboardDiv.appendChild(menuProjectLoader());
     lemon();
@@ -15,6 +23,8 @@ export default function mainboardLoader() {
         e.preventDefault;
 
         mainboardDiv.innerHTML = "";
+
+        // Preventing this button from making an option for multiple times
         const projectSelectBox = document.getElementById("project");
         projectSelectBox.innerHTML = "";
 
@@ -29,6 +39,7 @@ export default function mainboardLoader() {
 
         projectSelectBox.appendChild(selectProjectOption);
         projectSelectBox.appendChild(newProjectOption);
+
         mainboardDiv.appendChild(menuProjectLoader());
 
         projectBtn.className = "menu-selected";

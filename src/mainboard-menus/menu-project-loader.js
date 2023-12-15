@@ -9,7 +9,7 @@ export default function menuProjectLoader() {
     const allProjectDiv = document.createElement("div");
     allProjectDiv.id = "all-project-div";
 
-    if (Object.keys(projectManager.project).length === 0) {
+    if (Object.keys(projectManager.project()).length === 0) {
         const noProjectMessage = document.createElement("p");
         noProjectMessage.innerHTML = "No Project";
         noProjectMessage.id = "no-project";
@@ -19,11 +19,11 @@ export default function menuProjectLoader() {
             document.getElementById("dialog").showModal();
         })
         allProjectDiv.appendChild(noProjectMessage);
-    }
-
-    for (let key in projectManager.project) {
-        const projectDiv = newProjectLoader(key);
-        allProjectDiv.appendChild(projectDiv);
+    } else {
+        for (let key in projectManager.project()) {
+            const projectDiv = newProjectLoader(key);
+            allProjectDiv.appendChild(projectDiv);
+        }
     }
 
     const addProjectDiv = projectInputLoader();

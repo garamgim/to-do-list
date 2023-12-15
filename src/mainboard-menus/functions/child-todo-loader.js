@@ -30,6 +30,7 @@ export default function (div, todo) {
     done.id = `${todo.title.toLowerCase().split(" ").join("")}-done`
     done.className = "child-todo-done"
     done.checked = todo.done;
+
     if (done.checked) {
         title.style.textDecoration = "line-through";
         date.style.textDecoration = "line-through";
@@ -39,17 +40,18 @@ export default function (div, todo) {
         date.style.textDecoration = "none";
         urgent.style.textDecoration = "none";
     }
+
     done.addEventListener("click", () => {
         if (done.checked) {
             title.style.textDecoration = "line-through";
             date.style.textDecoration = "line-through";
             urgent.style.textDecoration = "line-through";
-            todo.done = true;
+            projectManager.updateTodo(todo, done, true);
         } else {
             title.style.textDecoration = "none";
             date.style.textDecoration = "none";
             urgent.style.textDecoration = "none";
-            todo.done = false;
+            projectManager.updateTodo(todo, done, false);
         }
     })
 

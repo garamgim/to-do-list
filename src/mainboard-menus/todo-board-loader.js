@@ -45,7 +45,7 @@ export default function (todo) {
     const editProject = document.getElementById("edit-project");
     editProject.innerHTML = "";
 
-    for (let key in projectManager.project) {
+    for (let key in projectManager.project()) {
         const option = document.createElement("option");
         option.value = key;
         option.innerHTML = key;
@@ -118,7 +118,7 @@ export default function (todo) {
                     // Make new project by input if valid
                     projectManager.moveProject(todo, newProjectInput.value);
                     const mainBoard = document.getElementById("mainboard");
-                    mainBoard.insertBefore(newProjectLoader(newProjectInput.value), mainBoard.firstChild);
+                    mainBoard.insertBefore(newProjectLoader(newProjectInput.value), mainBoard.lastChild);
 
                     // New option for the select box on todo-board
                     const currentProjectOption = document.createElement("option");
@@ -135,7 +135,7 @@ export default function (todo) {
             } else {
                 projectManager.moveProject(todo, editProject.value);
 
-                const projectDiv = document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}`);
+                const projectDiv = document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}-todos`);
                 projectDiv.appendChild(newTodoDiv(todo));
 
                 oldTodoDiv.remove();
