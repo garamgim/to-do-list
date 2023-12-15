@@ -1,6 +1,7 @@
 import todoBoardLoader from "../todo-board-loader";
 import { projectManager } from "../../data";
 import format from "date-fns/format";
+import BinIcon from "../../img/bin.svg"
 
 export default function (div, todo) {
 
@@ -54,7 +55,7 @@ export default function (div, todo) {
 
     const deleteTodoBtn = document.createElement("button");
     deleteTodoBtn.className = "delete-todo-button";
-    deleteTodoBtn.innerHTML = "✕";
+    deleteTodoBtn.innerHTML = `<img src=${BinIcon} class="bin-icon"></img>`
     deleteTodoBtn.addEventListener("click", (e) => {
         const result = confirm("Are you sure you want to delete this task?")
         if (result) {

@@ -1,5 +1,6 @@
 import childTodoLoader from "./child-todo-loader";
 import { projectManager } from "../../data";
+import BinIcon from "../../img/bin.svg"
 
 export default function (key) {
 
@@ -19,7 +20,7 @@ export default function (key) {
 
     const removeProjectBtn = document.createElement("button");
     removeProjectBtn.classList = "remove-project-button";
-    removeProjectBtn.innerHTML = "✕";
+    removeProjectBtn.innerHTML = `<img src=${BinIcon} class="bin-icon"></img>`;
     removeProjectBtn.addEventListener("click", () => {
         const result = confirm("Are you sure you want to delete this project?")
         if (result) {

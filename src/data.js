@@ -14,8 +14,8 @@ const projectManager = {
     project: {
         "My Project": [
             new Todo("Buy lemonade", false, false, "2023-12-31", "My Project", ""),
-            new Todo("Book tickets to Mars", false, true, "2023-12-10", "My Project", ""),
-            new Todo("Make a dentist appointment", true, false, "2023-12-25", "My Project", "")
+            new Todo("Squeeze lemon on the right", false, true, "2023-12-10", "My Project", ""),
+            new Todo("Call alfy", true, false, "2023-12-25", "My Project", "")
         ]
     },
 
