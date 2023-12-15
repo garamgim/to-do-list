@@ -50,6 +50,8 @@ export default function () {
         }
     })
 
+    const defaultOption = document.getElementById("form-default-option");
+
     projectSelectBox.appendChild(newProjectOption);
 
 
@@ -117,6 +119,7 @@ export default function () {
                 }
             }
             // Reset form
+            defaultOption.selected = true;
             newProjectInput.required = false;
             newProjectInput.style.display = "none";
             invalidMsg.style.display = "none";
