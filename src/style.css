@@ -169,8 +169,17 @@ main {
 }
 
 .project-title:hover,
-.child-todo-title:hover {
+.child-todo-title:hover,
+.no-todo-message:hover {
     transform: translate(-1px, -1px);
+    text-shadow: 1px 1px #a6a6a6;
+    transition: all 0.2s;
+}
+
+.project-title:active,
+.child-todo-title:active,
+.no-todo-message:active {
+    transform: translate(1px, 1px);
     text-shadow: 1px 1px #a6a6a6;
     transition: all 0.2s;
 }

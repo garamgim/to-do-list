@@ -29,9 +29,13 @@ export default function (key) {
             // Show "no project" message if there 0 project left after deleting
             if (Object.keys(projectManager.project).length === 0) {
                 const noProjectMessage = document.createElement("p");
-                noProjectMessage.innerHTML = "No Project"
-                noProjectMessage.id = "no-project"
+                noProjectMessage.innerHTML = "No Project";
+                noProjectMessage.id = "no-project";
                 noProjectMessage.className = "no-todo-message";
+                noProjectMessage.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    document.getElementById("dialog").showModal();
+                })
                 const allProjectDiv = document.getElementById("all-project-div");
                 allProjectDiv.appendChild(noProjectMessage);
             }

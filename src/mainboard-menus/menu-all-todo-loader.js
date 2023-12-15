@@ -44,9 +44,13 @@ export default function menuAllTodoLoader() {
 function todoMaker(arr, div) {
     if (arr.length === 0) {
         const p = document.createElement("p");
-        p.id = "no-task"
-        p.innerHTML = "No Task"
-        p.className = "no-todo-message"
+        p.id = "no-task";
+        p.innerHTML = "No Task";
+        p.className = "no-todo-message";
+        p.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("dialog").showModal();
+        })
         div.appendChild(p);
     } else {
         for (let i = 0; i < arr.length; i++) {

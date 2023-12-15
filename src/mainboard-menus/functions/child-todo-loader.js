@@ -69,23 +69,35 @@ export default function (div, todo) {
 
             if (divID[1] === "all" && projectManager.getAllTodo.length === 0) {
                 const p = document.createElement("p");
-                p.id = "no-task"
-                p.innerHTML = "No Task"
-                p.className = "no-todo-message"
+                p.id = "no-task";
+                p.innerHTML = "No Task";
+                p.className = "no-todo-message";
+                p.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    document.getElementById("dialog").showModal();
+                });
                 const div = document.getElementById("all-todo-div");
                 div.appendChild(p);
             } else if (divID[1] === "today" && projectManager.getTodayTodo(today).length === 0) {
                 const p = document.createElement("p");
-                p.id = "no-today-task"
-                p.innerHTML = "No Today's Task"
-                p.className = "no-todo-message"
+                p.id = "no-today-task";
+                p.innerHTML = "No Today's Task";
+                p.className = "no-todo-message";
+                p.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    document.getElementById("dialog").showModal();
+                });
                 const div = document.getElementById("mainboard-today-div");
                 div.appendChild(p);
             } else if (divID[1] === "urgent" && projectManager.getUrgentTodo.length === 0) {
                 const p = document.createElement("p");
-                p.id = "no-urgent-task"
-                p.innerHTML = "No Urgent Task"
-                p.className = "no-todo-message"
+                p.id = "no-urgent-task";
+                p.innerHTML = "No Urgent Task";
+                p.className = "no-todo-message";
+                p.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    document.getElementById("dialog").showModal();
+                });
                 const div = document.getElementById("mainboard-urgent-div");
                 div.appendChild(p);
             }

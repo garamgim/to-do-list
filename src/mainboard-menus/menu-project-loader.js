@@ -11,8 +11,8 @@ export default function menuProjectLoader() {
 
     if (Object.keys(projectManager.project).length === 0) {
         const noProjectMessage = document.createElement("p");
-        noProjectMessage.innerHTML = "No Project"
-        noProjectMessage.id = "no-project"
+        noProjectMessage.innerHTML = "No Project";
+        noProjectMessage.id = "no-project";
         noProjectMessage.className = "no-todo-message";
         noProjectMessage.addEventListener("click", (e) => {
             e.preventDefault();
