@@ -14,6 +14,10 @@ export default function menuProjectLoader() {
         noProjectMessage.innerHTML = "No Project"
         noProjectMessage.id = "no-project"
         noProjectMessage.className = "no-todo-message";
+        noProjectMessage.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("dialog").showModal();
+        })
         allProjectDiv.appendChild(noProjectMessage);
     }
 

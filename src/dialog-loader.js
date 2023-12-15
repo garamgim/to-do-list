@@ -15,7 +15,6 @@ export default function () {
     const newProjectInput = document.getElementById("new-project");
     const form = document.getElementById("form");
 
-
     // Close dialog button
     const closeBtn = document.getElementById("close-button");
     closeBtn.addEventListener("click", () => {
@@ -26,11 +25,9 @@ export default function () {
         dialog.close();
     })
 
-
     // Date formation
     const today = new Date();
     date.min = format(today, "yyyy-MM-dd");
-
 
     // Project select box
     const projectSelectBox = document.getElementById("project");
@@ -50,10 +47,7 @@ export default function () {
         }
     })
 
-    const defaultOption = document.getElementById("form-default-option");
-
     projectSelectBox.appendChild(newProjectOption);
-
 
     // Submit button
     const submitBtn = document.getElementById("submit-button");
@@ -119,7 +113,6 @@ export default function () {
                 }
             }
             // Reset form
-            defaultOption.selected = true;
             newProjectInput.required = false;
             newProjectInput.style.display = "none";
             invalidMsg.style.display = "none";

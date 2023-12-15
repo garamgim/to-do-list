@@ -20,8 +20,7 @@ export default function mainboardLoader() {
 
         const selectProjectOption = document.createElement("option");
         selectProjectOption.value = ""
-        selectProjectOption.disabled = true;
-        selectProjectOption.selected = true;
+        selectProjectOption.hidden = true;
         selectProjectOption.innerHTML = "Select a project";
 
         const newProjectOption = document.createElement("option");
