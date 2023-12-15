@@ -16,6 +16,12 @@
     font-weight: 700;
 }
 
+@font-face {
+    font-family: 'Rethink';
+    src: url(./font/RethinkSans-Italic.ttf);
+    font-style: italic;
+}
+
 body {
     background-color: #B0DAFF;
     width: 100vw;
@@ -393,4 +399,9 @@ main {
 #description-div {
     display: flex;
     flex-direction: column;
+}
+
+.no-todo-message {
+    font-size: 20px;
+    font-style: italic;
 }
