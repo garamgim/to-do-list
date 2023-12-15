@@ -1,5 +1,6 @@
 import todoBoardLoader from "../todo-board-loader";
 import { projectManager } from "../../data";
+import format from "date-fns/format";
 
 export default function (div, todo) {
 
@@ -60,6 +61,34 @@ export default function (div, todo) {
             e.preventDefault();
             projectManager.deleteTodo(todo);
             document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-todo`).remove();
+
+            // Show "no task" message if there is 0 todo after deleting 
+            const mainBoard = document.getElementById("mainboard");
+            let divID = mainBoard.children[0].id.split("-");
+            const today = format(new Date(), 'yyyy-MM-dd');
+
+            if (divID[1] === "all" && projectManager.getAllTodo.length === 0) {
+                const p = document.createElement("p");
+                p.id = "no-task"
+                p.innerHTML = "No Task"
+                p.className = "no-todo-message"
+                const div = document.getElementById("all-todo-div");
+                div.appendChild(p);
+            } else if (divID[1] === "today" && projectManager.getTodayTodo(today).length === 0) {
+                const p = document.createElement("p");
+                p.id = "no-today-task"
+                p.innerHTML = "No Today's Task"
+                p.className = "no-todo-message"
+                const div = document.getElementById("mainboard-today-div");
+                div.appendChild(p);
+            } else if (divID[1] === "urgent" && projectManager.getUrgentTodo.length === 0) {
+                const p = document.createElement("p");
+                p.id = "no-urgent-task"
+                p.innerHTML = "No Urgent Task"
+                p.className = "no-todo-message"
+                const div = document.getElementById("mainboard-urgent-div");
+                div.appendChild(p);
+            }
         }
     })
 

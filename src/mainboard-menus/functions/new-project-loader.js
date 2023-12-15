@@ -26,6 +26,16 @@ export default function (key) {
             delete projectManager.project[key];
             document.getElementById(`${key.toLowerCase().split(" ").join("")}`).remove();
             document.getElementById(`${key.toLowerCase().split(" ").join("")}-option`).remove();
+            // Show "no project" message if there 0 project left after deleting
+            if (Object.keys(projectManager.project).length === 0) {
+                const noProjectMessage = document.createElement("p");
+                noProjectMessage.innerHTML = "No Project"
+                noProjectMessage.id = "no-project"
+                noProjectMessage.className = "no-todo-message";
+                const allProjectDiv = document.getElementById("all-project-div");
+                allProjectDiv.appendChild(noProjectMessage);
+            }
+
         }
     })
     projectHeader.appendChild(projectTitle);

@@ -84,10 +84,12 @@ export default function () {
 
             const mainBoard = document.getElementById("mainboard");
             let divID = mainBoard.children[0].id.split("-");
+            // If creating a new project and project menu is opened on the mainboard
             if (newProjectInput.style.display !== "none" && divID[1] === "project") {
                 // Add a new project div to the main board
                 mainBoard.insertBefore(newProjectLoader(projectInput), mainBoard.lastChild);
-            } else {
+                document.getElementById("no-project").remove();
+            } else { // If adding to existing project
                 const todoDiv = document.createElement("div");
                 todoDiv.className = "child-todo";
                 todoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`
@@ -97,6 +99,7 @@ export default function () {
                     const div = document.getElementById(`${projectInput.toLowerCase().split(" ").join("")}-todos`);
                     div.appendChild(todoDiv);
                 } else if (divID[1] === "all") {
+                    document.getElementById("no-task").remove();
                     const div = document.getElementById("all-todo-div");
                     div.appendChild(todoDiv);
                 } else if (divID[1] === "today") {

@@ -38,12 +38,13 @@ export default function () {
 
             if (validity) {
                 e.preventDefault();
-                const allProjectDiv = document.getElementById("all-project-div")
+                const allProjectDiv = document.getElementById("all-project-div");
                 const title = addProjectInput.value;
                 projectManager.setProjectByTitle(title);
                 allProjectDiv.appendChild(newProjectLoader(title));
                 addProjectInput.value = "";
                 invalidMsg.style.display = "none";
+                document.getElementById("no-project").remove();
             } else {
                 invalidMsg.style.display = "";
             }

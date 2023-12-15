@@ -10,6 +10,7 @@ export default function menuUrgentLoader() {
         const p = document.createElement("p");
         p.id = "no-urgent-task"
         p.innerHTML = "No Urgent Task"
+        p.className = "no-todo-message"
         div.appendChild(p);
     } else {
         for (let i = 0; i < arr.length; i++) {

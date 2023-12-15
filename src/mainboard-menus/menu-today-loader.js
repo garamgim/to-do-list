@@ -13,6 +13,7 @@ export default function menuTodayLoader() {
         const p = document.createElement("p");
         p.id = "no-today-task"
         p.innerHTML = "No Today's Task"
+        p.className = "no-todo-message"
         div.appendChild(p);
     } else {
         for (let i = 0; i < arr.length; i++) {
