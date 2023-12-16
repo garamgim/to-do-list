@@ -1,11 +1,11 @@
-# to-do-list
-To-do List <br>
-Assignment link: https://www.theodinproject.com/lessons/node-path-javascript-todo-list <br>
+# To-do-list
+Assignment link: <br>
+https://www.theodinproject.com/lessons/node-path-javascript-todo-list <br>
 <br>
 
 ### Description
 Save your daily to-do and keep track of your tasks.
-<br>
+<br><br>
 
 ### Features
 * Group your tasks by project
