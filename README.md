@@ -2,8 +2,11 @@
 To-do List <br>
 Assignment link: https://www.theodinproject.com/lessons/node-path-javascript-todo-list <br>
 <br>
+
 ### Description
 Save your daily to-do and keep track of your tasks.
+<br>
+
 ### Features
 * Group your tasks by project
 * View, edit, and delete your to-do details
@@ -15,6 +18,7 @@ Save your daily to-do and keep track of your tasks.
 * Frutiger aero & Windows-xp themed design
 * Squeeze lemon &#127819;
 <br>
+
 ### Built with
 * HTML & CSS & JavaScript
 * JavaScript modules & Webpack bundle
