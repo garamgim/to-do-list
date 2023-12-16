@@ -75,7 +75,6 @@ export default function (todo) {
 
     const editDescription = document.getElementById("edit-description");
     editDescription.value = todo.description;
-    console.log(todo.description)
 
     const editButton = document.getElementById("edit-button");
     const editButtonClone = editButton.cloneNode(true);
@@ -83,7 +82,6 @@ export default function (todo) {
 
     editButtonClone.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log(`${todo.title.toLowerCase().split(" ").join("")}-todo`)
         let oldTodoDiv = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-todo`);
 
         // Update object
@@ -147,7 +145,6 @@ export default function (todo) {
                 todo.project = editProject.value;
 
                 const projectDiv = document.getElementById(`${editProject.value.toLowerCase().split(" ").join("")}-todos`);
-                console.log(projectDiv.id);
                 projectDiv.appendChild(newTodoDiv(todo));
 
                 oldTodoDiv.remove();
