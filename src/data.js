@@ -38,7 +38,7 @@ const projectManager = {
         let projects = this.project();
 
         let oldProject = todo.project;
-        let oldIdx = projects[todo.project].findIndex(i => i.title === todo.title);
+        let oldIdx = projects[oldProject].findIndex(i => i.title === todo.title);
 
         todo.project = newProjectTitle;
         if (newProjectTitle in projects) {
@@ -55,21 +55,18 @@ const projectManager = {
     deleteTodo: function (todo) {
         let projects = this.project();
         let project = todo.project;
-        let idx = projects[todo.project].findIndex(i => i.title === todo.title);
+        let idx = projects[project].findIndex(i => i.title === todo.title);
         projects[project].splice(idx, 1);
         localStorage.setItem(project, JSON.stringify(projects[project]));
     },
 
     updateTodo: function (todo, keyToChange, newValue) {
         let projects = this.project();
-        let projectTitle = todo.project
-        let projectArray = projects[projectTitle];
+        let project = todo.project;
+        let projectArray = projects[project];
         let idx = projectArray.findIndex(i => i.title === todo.title);
-        console.log(idx);
-        console.log(projectArray[idx][keyToChange.toString()]);
-        projectArray[idx][keyToChange.toString()] = newValue;
-        localStorage.setItem(projectTitle, JSON.stringify(projectArray));
-        // here to fix
+        projectArray[idx][keyToChange] = newValue;
+        localStorage.setItem(project, JSON.stringify(projectArray));
     },
 
     isProjectTitleValid: function (title) {

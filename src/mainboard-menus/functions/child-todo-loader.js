@@ -46,12 +46,12 @@ export default function (div, todo) {
             title.style.textDecoration = "line-through";
             date.style.textDecoration = "line-through";
             urgent.style.textDecoration = "line-through";
-            projectManager.updateTodo(todo, done, true);
+            projectManager.updateTodo(todo, "done", true);
         } else {
             title.style.textDecoration = "none";
             date.style.textDecoration = "none";
             urgent.style.textDecoration = "none";
-            projectManager.updateTodo(todo, done, false);
+            projectManager.updateTodo(todo, "done", false);
         }
     })
 

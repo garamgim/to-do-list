@@ -1,4 +1,4 @@
-import { projectManager } from "../data";
+import { Todo, projectManager } from "../data";
 import childTodoLoader from "./functions/child-todo-loader";
 import newProjectLoader from "./functions/new-project-loader";
 import enterForClick from "./functions/enter-for-click";
@@ -74,6 +74,7 @@ export default function (todo) {
 
     const editDescription = document.getElementById("edit-description");
     editDescription.value = todo.description;
+    console.log(todo.description)
 
     const editButton = document.getElementById("edit-button");
     const editButtonClone = editButton.cloneNode(true);
@@ -84,6 +85,12 @@ export default function (todo) {
         let oldTodoDiv = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-todo`);
 
         // Update object
+        projectManager.updateTodo(todo, "urgent", editUrgent.checked);
+        projectManager.updateTodo(todo, "date", editDate.value);
+        projectManager.updateTodo(todo, "done", editDone.checked);
+        projectManager.updateTodo(todo, "description", editDescription.value);
+        projectManager.updateTodo(todo, "title", editTitle.value);
+
         todo.title = editTitle.value;
         todo.urgent = editUrgent.checked;
         todo.date = editDate.value;
@@ -91,17 +98,17 @@ export default function (todo) {
         todo.description = editDescription.value;
 
         // Update mainboard display
-        displayTitle.innerHTML = todo.title;
-        displayDate.innerHTML = todo.date;
+        displayTitle.innerHTML = editTitle.value;
+        displayDate.innerHTML = editDate.value;
 
-        if (todo.urgent) {
+        if (editUrgent.checked) {
             displayUrgent.innerHTML = "&#10071";
         } else {
             displayUrgent.innerHTML = "";
         }
-        displayDone.checked = todo.done;
+        displayDone.checked = editDone.checked;
 
-        if (todo.done) {
+        if (editDone.checked) {
             displayTitle.style.textDecoration = "line-through";
             displayDate.style.textDecoration = "line-through";
             displayUrgent.style.textDecoration = "line-through";
@@ -117,14 +124,15 @@ export default function (todo) {
                 if (projectManager.isProjectTitleValid(newProjectInput.value)) {
                     // Make new project by input if valid
                     projectManager.moveProject(todo, newProjectInput.value);
-                    const mainBoard = document.getElementById("mainboard");
-                    mainBoard.insertBefore(newProjectLoader(newProjectInput.value), mainBoard.lastChild);
+                    todo.project = newProjectInput.value;
+                    const allProjectDiv = document.getElementById("all-project-div");
+                    allProjectDiv.appendChild(newProjectLoader(newProjectInput.value));
 
                     // New option for the select box on todo-board
                     const currentProjectOption = document.createElement("option");
-                    currentProjectOption.value = todo.project;
-                    currentProjectOption.innerHTML = todo.project;
-                    currentProjectOption.id = `${todo.project.toLowerCase().split(" ").join("")}-option-todo-board`;
+                    currentProjectOption.value = newProjectInput.value;
+                    currentProjectOption.innerHTML = newProjectInput.value;
+                    currentProjectOption.id = `${newProjectInput.value.toLowerCase().split(" ").join("")}-option-todo-board`;
                     editProject.insertBefore(currentProjectOption, editProject.lastChild);
 
                     oldTodoDiv.remove();
@@ -134,8 +142,10 @@ export default function (todo) {
                 }
             } else {
                 projectManager.moveProject(todo, editProject.value);
+                todo.project = editProject.value;
 
-                const projectDiv = document.getElementById(`${todo.project.toLowerCase().split(" ").join("")}-todos`);
+                const projectDiv = document.getElementById(`${editProject.value.toLowerCase().split(" ").join("")}-todos`);
+                console.log(projectDiv.id);
                 projectDiv.appendChild(newTodoDiv(todo));
 
                 oldTodoDiv.remove();
@@ -149,17 +159,17 @@ export default function (todo) {
         function newTodoDiv(todo) {
             const newTodoDiv = document.createElement("div");
             newTodoDiv.className = "child-todo";
-            newTodoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`;
+            newTodoDiv.id = `${editTitle.value.toLowerCase().split(" ").join("")}-todo`;
             childTodoLoader(newTodoDiv, todo);
             return newTodoDiv;
         }
 
         function refreshForm() {
             alert("Successfully Edited!");
+            newProjectInput.value = "";
             newProjectInput.style.display = "none";
             toDoBoard.style.display = "none";
             invalidMsg.style.display = "none";
-            newProjectInput.value = "";
             lemon.style.display = "flex";
         }
     })
