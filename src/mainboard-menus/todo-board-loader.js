@@ -1,4 +1,4 @@
-import { Todo, projectManager } from "../data";
+import { projectManager } from "../data";
 import childTodoLoader from "./functions/child-todo-loader";
 import newProjectLoader from "./functions/new-project-loader";
 import enterForClick from "./functions/enter-for-click";
@@ -9,6 +9,7 @@ export default function (todo) {
     const displayUrgent = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-urgent`);
     const displayDate = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-date`);
     const displayDone = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-done`);
+    const childTodoDiv = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-todo`);
 
     const lemon = document.getElementById("lemon-board");
     lemon.style.display = "none";
@@ -82,6 +83,7 @@ export default function (todo) {
 
     editButtonClone.addEventListener("click", (e) => {
         e.preventDefault();
+        console.log(`${todo.title.toLowerCase().split(" ").join("")}-todo`)
         let oldTodoDiv = document.getElementById(`${todo.title.toLowerCase().split(" ").join("")}-todo`);
 
         // Update object
@@ -155,6 +157,12 @@ export default function (todo) {
             oldTodoDiv = newTodoDiv(todo);
             refreshForm();
         }
+
+        displayTitle.id = `${todo.title.toLowerCase().split(" ").join("")}-title`;
+        displayUrgent.id = `${todo.title.toLowerCase().split(" ").join("")}-urgent`;
+        displayDate.id = `${todo.title.toLowerCase().split(" ").join("")}-date`;
+        displayDone.id = `${todo.title.toLowerCase().split(" ").join("")}-done`;
+        childTodoDiv.id = `${todo.title.toLowerCase().split(" ").join("")}-todo`;
 
         function newTodoDiv(todo) {
             const newTodoDiv = document.createElement("div");
