@@ -1,6 +1,6 @@
 # To-do-list
-[Assignment link](https://www.theodinproject.com/lessons/node-path-javascript-todo-list) 👈 <br>
-[Live Demo](https://garamgim.github.io/to-do-list/) 👈 <br>
+[Assignment link](https://www.theodinproject.com/lessons/node-path-javascript-todo-list) <br>
+[Live Demo](https://garamgim.github.io/to-do-list/) <br>
 <br>
 
 ### 🗒️ Description
